@@ -11,14 +11,17 @@ export class UserService {
 
   user: User;
   constructor(private http: HttpClient) {
-    initialize({
-      apikey: '5xwu18l44bh1uw'
-    })
+  }
+  init(initParams: {
+    apikey?: string,
+    identity?: string
+  }) {
+
   }
 
   get() {
     let user_info = jwt_decode(localStorage.getItem('identity')) as any
-    
+
     return users.get(user_info._id)
   }
   addNewUser(userValue: User) {

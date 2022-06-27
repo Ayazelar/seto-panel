@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     await this._authService.login(this.loginValue).then(jwt => {
       const admin = jwt_decode(jwt);
       if(this.isApproved(admin)){
-        localStorage.setItem('identity',jwt)
+        this._authService.onUserLoggedIn(jwt)
         this._router.navigate(['panel/dashboard'])
       }else{
         this.showRoleErrToast()

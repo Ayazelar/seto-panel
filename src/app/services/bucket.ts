@@ -1,4 +1,5 @@
 import * as Bucket from '@spica-devkit/bucket';
+import { environment } from 'src/environments/environment';
   /**
    * Call this method before interacting with buckets.
    * @param initOptions Initialize options to initialize the '@spica-devkit/bucket'.
@@ -6,7 +7,7 @@ import * as Bucket from '@spica-devkit/bucket';
   export function initialize(
     ...initOptions: Parameters<typeof Bucket.initialize>
   ) {
-    initOptions[0].publicUrl = 'https://seto-app-c2519.hq.spicaengine.com/api';
+    initOptions[0].publicUrl = environment.url;
     Bucket.initialize(...initOptions);
   }
 

@@ -14,18 +14,12 @@ export class DriverService {
 	drivers: any;
 	driverAplplications: DriverApplication[];
 
-	constructor(private http: HttpClient, private _userService: UserService) {
+	constructor(private http: HttpClient, private _userService: UserService) {	
 		initialize({
-			apikey: '5xwu18l44bh1uw'
+			identity:localStorage.getItem('identity')
 		})
 	}
-
-	init(initParams: {
-		apikey?: string,
-		identity?: string
-	}) {
-		
-	}
+	
 	async getAll() {
 		await drivers.getAll({queryParams:{relation:true,filter:{is_verified:1}}}).then(drivers=>{
 			this.drivers = drivers as Driver
@@ -37,7 +31,7 @@ export class DriverService {
 
 		// this.http.post(this.url,'bucketid')
 		console.log(newDriver);
-		this._userService.addNewUser(newDriver.user)
+		// this._userService.addNewUser(newDriver.user)
 	}
 	async get(id: string) {
 		return await drivers.getAll({queryParams:{filter:{user:id},relation:true}})

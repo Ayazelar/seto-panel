@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
 	canActivate(
 		route: ActivatedRouteSnapshot,
 		state: RouterStateSnapshot): boolean | Promise<boolean> {
-		
+		//identity paketinde check jwt
 		const isAuthenticated = localStorage.getItem('identity');
 		if (!isAuthenticated) {
 			this.router.navigate(['/login']);

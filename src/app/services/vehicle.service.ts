@@ -15,9 +15,6 @@ export class VehicleService {
 	newVehicle: Vehicle;
 
 	constructor(private http: HttpClient) {
-		initialize({
-			apikey: '5xwu18l44bh1uw'
-		})
 	}
 
 	async getAll() {
