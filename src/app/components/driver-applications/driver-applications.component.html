@@ -1,0 +1,30 @@
+<div class='table'>
+    <div>
+        <h5>Driver Applications</h5>
+        <button pButton type='button' (click)="navigateToAddDriver()" label='Add driver'
+            class='p-button p-button-secondary'></button>
+    </div>
+    <div class="main">
+        <p-table [columns]="keys" [value]="driverApplications" responsiveLayout="scroll">
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns ">
+
+                        {{renameKey(col) | titlecase}}
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr>
+                    <td (click)="navigateToDetails(rowData)" *ngFor="let col of columns">
+
+                        <p *ngIf="col != 'status'">{{rowData[col]}}</p>
+                        <p [ngClass]="rowData['status']" class="status" *ngIf="col == 'status'">
+                            {{rowData[col] | titlecase}}</p>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <p class="nothing" *ngIf="!driverApplications">There is nothing to view</p>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<!-- <div class="key-value" *ngFor="let item of value | keyvalue">
+        <span>{{item.key | titlecase}}</span>
+        <p *ngIf="!getStatus(item.key)">{{item.value}}</p>
+        <textarea pInputTextarea *ngIf="getStatus(item.key)"  readonly>{{item.value}}</textarea>
+    </div>
+     -->
+<div *ngIf="vehicle">
+    <div class="key-value" *ngFor="let key of keys">
+        <span>{{key.replace('_',' ')| titlecase}}</span>
+        <p>{{vehicle[key]}}</p>
+    </div>
+</div>

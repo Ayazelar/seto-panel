@@ -1,0 +1,21 @@
+:host {
+    div {
+        .key-value:nth-child(2n) {
+            background: #f7f7f7;
+            border-top: 2px solid #f2f2f2;
+        }
+        .key-value {
+            display: flex;
+            width: 100%;
+            padding: 10px 5px;
+            span {
+                width: 50%;
+                font-weight: 600;
+            }
+
+            p {
+                width: 50%;
+            }
+        }
+    }
+}

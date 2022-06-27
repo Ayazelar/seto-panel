@@ -1,0 +1,49 @@
+:host {
+    .table {
+        width: 100%;
+
+        .header {
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+
+            span {
+                font-weight: 600;
+            }
+        }
+        div {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 0 0 10px;
+            button {
+                padding: 4px 10px;
+                font-size: 0.7rem;
+                margin: 8px 5px;
+            }
+        }
+    }
+    .main {
+        p-table {
+            width: 100%;
+            ::ng-deep {
+                .status {
+                    width: fit-content;
+                    padding: 4px 17px;
+                    font-weight: 600;
+                    font-size: 0.7rem;
+                    border-radius: 25px;
+                }
+                .accepted {
+                    background: #a3ff47;
+                }
+                .rejected {
+                    background: #ff0000;
+                }
+                .pending {
+                    background: #ffff00;
+                }
+            }
+        }
+    }
+}

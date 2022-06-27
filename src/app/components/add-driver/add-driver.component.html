@@ -1,0 +1,93 @@
+<h2>Add new driver</h2>
+<div class="main">
+	<div class="driver-fields">
+		<div class="field">
+			<p-avatar icon="pi pi-user-plus"></p-avatar>
+			<input [(ngModel)]="driverValue.profilePicture" (change)="imagePreview('profilePicture',$event)"
+				class="file" type="file" accept="image/*">
+			<small>Enter profile picture</small>
+			<img *ngIf="driverValue.profilePicture" [src]="driverValue.profilePicture">
+		</div>
+		<div class="field">
+			<label>Name</label>
+			<input [(ngModel)]="driverValue.name" id="name" type="text" pInputText />
+			<small>Enter name</small>
+		</div>
+		<div class="field">
+			<label>Surname</label>
+			<input [(ngModel)]="driverValue.surname" id="surname" type="text" pInputText />
+			<small>Enter surname</small>
+		</div>
+		<div class="field">
+			<label>E-mail</label>
+			<input [(ngModel)]="driverValue.email" id="email" type="text" pInputText />
+			<small>Enter e-mail</small>
+		</div>
+		<div class="field">
+			<label>Mobile Number</label>
+			<input [(ngModel)]="driverValue.mobile_number" id="mobile_number" type="text" pInputText />
+			<small>Enter mobile number</small>
+		</div>
+		<div class="field">
+			<label>Company</label>
+			<input [(ngModel)]="driverValue.company_name" id="company" type="text" pInputText />
+			<small>Enter company name</small>
+		</div>
+		<div class="field">
+			<label> ID</label>
+			<input [(ngModel)]="driverValue.id" id="id" type="text" pInputText />
+			<small>Enter  id</small>
+		</div>
+		<div class="field">
+			<label>Driver License Number</label>
+			<input [(ngModel)]="driverValue.driver_licence.licence_number" id="driver-license" type="text" pInputText />
+			<small>Enter driver licanse number</small>
+		</div>
+		<div class="field">
+			<label>Driver License Expiration</label>
+			<p-calendar placeholder="00 / 00 / 0000" [(ngModel)]="driverValue.driver_licence.expiration" dateFormat="dd.mm.yy"></p-calendar>
+		</div>
+		<div class="field">
+			<label>Taxi License Number</label>
+			<input [(ngModel)]="driverValue.taxi_licence.licence_number" id="taxi-license" type="text" pInputText />
+			<small>Enter taxi licanse number</small>
+		</div>
+		<div class="field">
+			<label>Taxi License Expiration</label>
+			<p-calendar placeholder="00 / 00 / 0000" [(ngModel)]="driverValue.taxi_licence.expiration" dateFormat="dd.mm.yy"></p-calendar>
+		</div>
+	</div>
+	<div class="image-fields">
+		<div class="image-field">
+			<input class="file" type="file" [(ngModel)]="driverValue.identityPic"
+				(change)="imagePreview('identityPic',$event)" accept="image/*">
+			<i class="pi pi-id-card"></i>
+			<small>Enter identity picture</small>
+			<img *ngIf="driverValue.identityPic" [src]="driverValue.identityPic">
+		</div>
+		<div class="image-field">
+			<input [(ngModel)]="driverValue.drivingLicencePic" (change)="imagePreview('drivingLicensePic',$event)"
+				class="file" type="file" accept="image/*">
+			<i class="pi pi-car"></i>
+			<small>Enter driving licence picture</small>
+			<img *ngIf="driverValue.drivingLicencePic" [src]="driverValue.drivingLicencePic">
+		</div>
+		<div class="image-field">
+			<input [(ngModel)]="driverValue.taxiLicencePicFront" (change)="imagePreview('taxiLicensePicFront',$event)"
+				class="file" type="file" accept="image/*">
+			<i class="pi pi-car"></i>
+			<small>Enter taxi licence picture [ front ]</small>
+			<img *ngIf="driverValue.taxiLicencePicFront" [src]="driverValue.taxiLicencePicFront">
+		</div>
+		<div class="image-field">
+			<input [(ngModel)]="driverValue.taxiLicencePicBack" (change)="imagePreview('taxiLicensePicBack',$event)"
+				class="file" type="file" accept="image/*">
+			<i class="pi pi-car"></i>
+			<small>Enter taxi licence picture [ back ]</small>
+			<img *ngIf="driverValue.taxiLicencePicBack" [src]="driverValue.taxiLicencePicBack">
+		</div>
+	</div>
+</div>
+<button pButton type="button"
+	[disabled]="!driverValue.taxiLicencePicBack.length || !driverValue.taxiLicencePicFront.length || !driverValue.drivingLicencePic.length|| !driverValue.identityPic.length || !driverValue.profilePicture.length || !driverValue.name.length || !driverValue.surname.length || !driverValue.id || !driverValue.driver_licence.licence_number.length || !driverValue.driver_licence.expiration || !driverValue.taxi_licence.licence_number || !driverValue.taxi_licence.expiration"
+	(click)="addNewDriver()" label="Next" class="p-button-success"></button>

@@ -1,0 +1,14 @@
+<div class="main">
+    <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+        <input type="email" [(ngModel)]="loginValue.email" pInputText placeholder="E-Mail">
+    </div>
+    <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
+        <input type="password" [(ngModel)]="loginValue.password" pInputText placeholder="Password">
+    </div>
+    <span (click)="navigateToSignup()" class="sign-up">Sign up</span>
+    <button (click)="login()" [loading]="isLoading" pButton type="button" label="Login" class="p-button-success"
+        [disabled]="!loginValue.email.length || !loginValue.password.length"></button>
+</div>
+<p-toast position="top-right"></p-toast>

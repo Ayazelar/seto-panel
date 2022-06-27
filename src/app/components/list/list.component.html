@@ -1,0 +1,24 @@
+<div class="main" *ngIf="value">
+    <h2 *ngIf="title">{{title}}</h2>
+    <p-table [columns]="keys" [value]="value" responsiveLayout="scroll">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns">
+                    
+                    {{renameKey(col) | titlecase}}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+                <td (click)="navigateToDetails(rowData)" *ngFor="let col of columns">
+                    
+                    <p *ngIf="(rowData[col] | typeof)!=='boolean'&&(rowData[col] | typeof)!=='number'">{{rowData[col]}}</p>
+                    <p *ngIf="(rowData[col] | typeof)=='boolean'||(rowData[col] | typeof)=='number'" [class]="rowData[col]?'active boolean':'deactive boolean'">
+                        {{rowData[col]?'Active':'Deactive'}}</p>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <p class="nothing" *ngIf="!value">There is nothing to view</p>
+</div>

@@ -1,0 +1,23 @@
+<div class="main">
+    <h2>Drivers</h2>
+    <p-table [columns]="keys" [value]="drivers" responsiveLayout="scroll">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns ">
+
+                    {{renameKey(col) | titlecase}}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr (click)="navigateToDriver(rowData['_id'])">
+                <td *ngFor="let col of columns">
+                    <p *ngIf="col !== 'is_online'">{{rowData[col]}}</p>
+                    <p [class]="rowData[col]?'online boolean':'offline boolean'" *ngIf="col == 'is_online'">
+                        {{rowData[col]?'online':'offline' | titlecase}}</p>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <p class="nothing" *ngIf="!drivers.length">There is nothing to view</p>
+</div>

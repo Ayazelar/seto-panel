@@ -1,0 +1,15 @@
+div {
+  display: flex;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 20px;
+
+  app-navbar {
+    margin-right: 20px;
+  }
+  .outlet {
+    width: 100%;
+    box-shadow: 0px 0px 35px -28px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+  }
+}

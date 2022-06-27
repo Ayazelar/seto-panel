@@ -1,0 +1,67 @@
+:host {
+  .main {
+    width: 40%;
+    .field {
+      display: flex;
+      flex-direction: column;
+      margin-top: 30px;
+      width: 100%;
+      small {
+        font-size: 0.7rem;
+        color: gray;
+        margin-top: 3px;
+      }
+      p-dropdown {
+        width: 100%;
+        ::ng-deep {
+          .p-hidden-accessible {
+            display: none;
+          }
+          .p-dropdown {
+            width: 100%;
+            background: #f6f6f685;
+          }
+        }
+      }
+    }
+    .image-field {
+      width: 100%;
+      height: 200px;
+      background: #f6f6f6;
+      border-radius: 20px;
+      margin-top: 16px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      overflow: hidden;
+      .file {
+        opacity: 0;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 99;
+      }
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+      }
+      i {
+        font-size: 2rem;
+        color: lightslategray;
+      }
+      small {
+        color: gray;
+        font-weight: 600;
+        font-size: 0.7rem;
+      }
+    }
+    button {
+      width: 100%;
+      margin-top: 20px;
+    }
+  }
+}

@@ -1,0 +1,43 @@
+<div class="main">
+	<h2>Add Vehicle</h2>
+	<div class="field">
+		<label>Manufacturer</label>
+		<input [(ngModel)]="vehicleValue.manufacturer" id="manufacturer" type="text" pInputText />
+		<small>Enter manufacturer</small>
+	</div>
+	<div class="field">
+		<label>Model</label>
+		<input [(ngModel)]="vehicleValue.model" id="model" type="text" pInputText />
+		<small>Enter model</small>
+	</div>
+	<div class="field">
+		<label>Year</label>
+		<input [(ngModel)]="vehicleValue.year" id="year" type="text" pInputText />
+		<small>Enter year</small>
+	</div>
+	<div class="field">
+		<label>License Plate</label>
+		<input [(ngModel)]="vehicleValue.licensePlate" id="license-plate" type="text" pInputText />
+		<small>Enter license plate</small>
+	</div>
+	<div class="field">
+		<label>Color</label>
+		<input [(ngModel)]="vehicleValue.color" id="color" type="text" pInputText />
+		<small>Enter color</small>
+	</div>
+	<div class="image-field">
+		<input [(ngModel)]="vehicleValue.licensePicFront" class="file" type="file"
+			(change)="imagePreview('licensePicFront',$event)" accept="image/*">
+		<i class="pi pi-id-card"></i>
+		<small>Enter license picture [ front ]</small>
+		<img *ngIf="vehicleValue.licensePicFront" [src]="vehicleValue.licensePicFront" alt="">
+	</div>
+	<div class="image-field">
+		<input [(ngModel)]="vehicleValue.licensePicBack" class="file" type="file"
+			(change)="imagePreview('licensePicBack',$event)" accept="image/*">
+		<i class="pi pi-id-card"></i>
+		<small>Enter license picture [ back ]</small>
+		<img *ngIf="vehicleValue.licensePicBack" [src]="vehicleValue.licensePicBack" alt="">
+	</div>
+	<button pButton [disabled]="!vehicleValue.color || !vehicleValue.manufacturer || !vehicleValue.model.length || !vehicleValue.licensePlate.length || !vehicleValue.year || !vehicleValue.licensePicFront || !vehicleValue.licensePicBack "type="button" label="Next" class="p-button-success" (click)="addNewVehicle()"></button>
+</div>

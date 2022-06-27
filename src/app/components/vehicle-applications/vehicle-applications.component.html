@@ -1,0 +1,29 @@
+<div class='table'>
+    <div>
+        <h5>Vehicle Applications</h5>
+        <button pButton type='button' (click)="navigateToAddVehicle()" label='Add vehicle'
+            class='p-button p-button-secondary'></button>
+    </div>
+    <div class="main">
+        <p-table [columns]="keys" [value]="vehicleApplications" responsiveLayout="scroll">
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns">
+
+                        <p *ngIf="col!='status_message'">{{renameKey(col) | titlecase}}</p>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr>
+                    <td (click)="navigateToDetails(rowData)" *ngFor="let col of columns">
+
+                        <p *ngIf="col != 'status'">{{rowData[col]}}</p>
+                        <p [ngClass]="rowData['status']" class="status" *ngIf="col == 'status'">
+                            {{rowData[col] | titlecase}}</p>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <p class="nothing" *ngIf="!vehicleApplications">There is nothing to view</p>
+    </div>
