@@ -37,6 +37,7 @@ import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-de
 import { TypeofPipe } from './pipes/typeof.pipe';
 import { SortByNamePipe } from './pipes/sort-by-name.pipe';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { DriverApplicationDetailComponent } from './components/driver-application-detail/driver-application-detail.component';
 
 
 
@@ -60,6 +61,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     TypeofPipe,
     SortByNamePipe,
     SignUpComponent,
+    DriverApplicationDetailComponent,
   ],
   imports: [
     BrowserModule,

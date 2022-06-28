@@ -10,8 +10,8 @@ import { DriverService } from 'src/app/services/driver.service';
 })
 export class DriverApplicationsComponent implements OnInit {
 
-  driverApplications: DriverApplication[];
-  keys: string[]=[];
+  driverApplications: DriverApplication[]=[];
+  keys = ['name','surname','email'];
 
   constructor(private _router: Router, private _driverService: DriverService) { }
 
@@ -23,21 +23,24 @@ export class DriverApplicationsComponent implements OnInit {
     this._router.navigate(['panel/add-driver'])
   }
   getDriverApplications() {
-    this.driverApplications = this._driverService.getDriverApplications().map(driverApplication => {
-      const mappedDriverApplication = {
-        ...driverApplication,
-        ...driverApplication.user
-      }
-      delete mappedDriverApplication.driver
-      delete mappedDriverApplication.user
-      delete mappedDriverApplication.company_name
-      delete mappedDriverApplication.mobile_number
-
-      return mappedDriverApplication
+    let driverApps = this._driverService.getDriverApplications()
+    driverApps.then(drivers=>{
+      drivers.map((driver:DriverApplication) => {
+        let mappedDriver = {
+          ...driver,
+          ...driver.user
+        }
+        delete mappedDriver.user;
+        this.driverApplications.push(mappedDriver)
+      });
+      console.log(this.driverApplications);
+      
+      // const mappedDriver = {
+      //   ...driver,
+      //   ...driver.user
+      // }
+      // delete mappedDriver.user;      
     })
-    this.keys = Object.keys(this.driverApplications[0])
-    this.keys.sort((a, b) => a.localeCompare(b)) 
-    
   }
 
   renameKey(key: string) {
@@ -45,8 +48,8 @@ export class DriverApplicationsComponent implements OnInit {
     
     return key;
   }
-  navigateToDetails(id: string) {
-    this._router.navigate(['panel/driver-details/', JSON.stringify(id)])
+  navigateToDetail(id: string) {
+    this._router.navigate(['panel/driver-application-detail/', id])
   }
 
 }

@@ -14,6 +14,7 @@ import { AuthGuard } from './services/auth.guard';
 import { DriverDetailsComponent } from './components/driver-details/driver-details.component';
 import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-details.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { DriverApplicationDetailComponent } from './components/driver-application-detail/driver-application-detail.component';
 
 
 
@@ -54,6 +55,9 @@ const routes: Routes = [
       {
         path: 'vehicle-details/:id', component: VehicleDetailsComponent
       },
+      {
+        path: 'driver-application-detail/:id', component: DriverApplicationDetailComponent
+      }
     ]
   },
   {

@@ -63,7 +63,7 @@ export class AddDriverComponent implements OnInit {
 				name: this.driverValue.name,
 				surname: this.driverValue.surname,
 				email: this.driverValue.email,
-				mobile_number: this.driverValue.email
+				mobile_number: this.driverValue.mobile_number
 			},
 			company_name:this.driverValue.company_name
 		}

@@ -10,10 +10,10 @@ import { VehicleService } from 'src/app/services/vehicle.service';
 })
 export class VehicleApplicationsComponent implements OnInit {
 
-  keys: string[];
-  vehicleApplications: Vehicle[]=[];
+  keys = ['model', 'color', 'year', 'status'];
+  vehicleApplications: Vehicle[] = [];
 
-  constructor(private _router: Router,private _vehicleService:VehicleService) { }
+  constructor(private _router: Router, private _vehicleService: VehicleService) { }
 
   ngOnInit(): void {
     this.getVehicleApplications()
@@ -21,19 +21,12 @@ export class VehicleApplicationsComponent implements OnInit {
   navigateToAddVehicle() {
     this._router.navigate(['panel/add-vehicle'])
   }
-  getVehicleApplications(){
-    
-    this.vehicleApplications = this._vehicleService.getVehicleApplications().map(vehicleApplication=>{
-      const mappedVehicleApplication = {
-        ...vehicleApplication,
-      };
-      delete mappedVehicleApplication.status_message;
-      delete mappedVehicleApplication.licence_plate;
-      delete mappedVehicleApplication.vehicle_licence_pictures;
-      return mappedVehicleApplication
+  getVehicleApplications() {
+
+    this._vehicleService.getVehicleApplications().then(vehicleApplications => {
+      this.vehicleApplications = vehicleApplications
+      console.log(this.vehicleApplications);
     })
-    this.keys = Object.keys(this.vehicleApplications[0]) 
-    this.keys.sort((a, b) => a.localeCompare(b)) 
   }
   navigateToDetails(id: string) {
     this._router.navigate(['panel/vehicle-details/', JSON.stringify(id)])

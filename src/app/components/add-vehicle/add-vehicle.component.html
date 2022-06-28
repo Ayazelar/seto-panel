@@ -12,7 +12,7 @@
 	</div>
 	<div class="field">
 		<label>Year</label>
-		<input [(ngModel)]="vehicleValue.year" id="year" type="text" pInputText />
+		<input [(ngModel)]="vehicleValue.year" id="year" type="number" pInputText />
 		<small>Enter year</small>
 	</div>
 	<div class="field">
@@ -39,5 +39,7 @@
 		<small>Enter license picture [ back ]</small>
 		<img *ngIf="vehicleValue.licensePicBack" [src]="vehicleValue.licensePicBack" alt="">
 	</div>
-	<button pButton [disabled]="!vehicleValue.color || !vehicleValue.manufacturer || !vehicleValue.model.length || !vehicleValue.licensePlate.length || !vehicleValue.year || !vehicleValue.licensePicFront || !vehicleValue.licensePicBack "type="button" label="Next" class="p-button-success" (click)="addNewVehicle()"></button>
+	<button pButton
+		[disabled]="!vehicleValue.color || !vehicleValue.manufacturer || !vehicleValue.model.length || !vehicleValue.licensePlate.length || !vehicleValue.year || !vehicleValue.licensePicFront || !vehicleValue.licensePicBack "
+		type="button" label="Next" class="p-button-success" (click)="addNewVehicle()"></button>
 </div>

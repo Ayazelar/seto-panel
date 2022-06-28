@@ -16,7 +16,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
-                    <td (click)="navigateToDetails(rowData)" *ngFor="let col of columns">
+                    <td (click)="navigateToDetail(rowData['_id'])" *ngFor="let col of columns">
 
                         <p *ngIf="col != 'status'">{{rowData[col]}}</p>
                         <p [ngClass]="rowData['status']" class="status" *ngIf="col == 'status'">

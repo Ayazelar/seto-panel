@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Vehicle } from '../interfaces/vehicle';
-import { cars, initialize } from './bucket'
+import { cars, initialize,vehicle_applications } from './bucket'
 
 @Injectable({
 	providedIn: 'root'
@@ -11,10 +11,13 @@ export class VehicleService {
 
 	url = environment.url;
 	vehicles: any;
-	vehicleApplications: Vehicle[]
+	vehicleApplications: any;
 	newVehicle: Vehicle;
 
 	constructor(private http: HttpClient) {
+		initialize({
+			identity:localStorage.getItem('identity')
+		})
 	}
 
 	async getAll() {
@@ -25,30 +28,25 @@ export class VehicleService {
 	}
 
 	addNewVehicle(vehicleValue: any) {
-		this.newVehicle = {
+		console.log('SA');
+		
+		let newVehicle = {
 			model: vehicleValue.manufacturer + vehicleValue.model,
 			color: vehicleValue.color,
 			licence_plate: vehicleValue.licensePlate,
 			vehicle_licence_pictures: [vehicleValue.licensePicBack, vehicleValue.licensePicBack],
 			year: vehicleValue.year
-		}
-		console.log(this.newVehicle);
+		} 
+		vehicle_applications.insert(newVehicle)
 
 	}
 	get(id: string) {
 		return cars.get(id)
 	}
-	getVehicleApplications() {
-		return this.vehicleApplications = [
-			{
-				model: 'A4',
-				year: '2010',
-				color: 'Black',
-				licence_plate: '07 AS 201',
-				vehicle_licence_pictures: ['pic'],
-				status: 'pending',
-				status_message: 'FOR NOT ALLOWED'
-			}
-		]
+	async getVehicleApplications() {
+		await vehicle_applications.getAll().then(apps=>{
+			this.vehicleApplications = apps
+		})
+		return this.vehicleApplications
 	}
 }
