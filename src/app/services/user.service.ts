@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../interfaces/user';
-import { users, initialize } from './bucket'
+import { company_admins, initialize } from './bucket'
 import jwt_decode from 'jwt-decode';
 
 @Injectable({
@@ -11,18 +11,14 @@ export class UserService {
 
   user: User;
   constructor(private http: HttpClient) {
-  }
-  init(initParams: {
-    apikey?: string,
-    identity?: string
-  }) {
-
+    initialize({
+      identity: localStorage.getItem('identity')
+    })
   }
 
   get() {
-    let user_info = jwt_decode(localStorage.getItem('identity')) as any
-
-    return users.get(user_info._id)
+    let user_info = jwt_decode(localStorage.getItem('identity')) as any    
+    return company_admins.getAll({queryParams:{filter:{email:user_info.identifier},relation:true}})
   }
   addNewUser(userValue: User) {
     // this.http.post()

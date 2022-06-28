@@ -12,6 +12,7 @@ export class DriversComponent implements OnInit {
 
   drivers: Driver[]=[];
   keys = ['name','surname','email','is_online']
+  loading: boolean = false;
   
   constructor(private _router: Router,private _driverService: DriverService) {
 
@@ -22,6 +23,7 @@ export class DriversComponent implements OnInit {
   }
 
   async getDrivers(){
+    this.loading = true
     let allDirvers = await this._driverService.getAll();
     
     allDirvers.map(driver=>{
@@ -32,6 +34,7 @@ export class DriversComponent implements OnInit {
       delete mappedDriver.user;      
       this.drivers.push(mappedDriver);
     })
+    this.loading = false
       
   }
   

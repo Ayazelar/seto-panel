@@ -1,3 +1,4 @@
+<p-progressSpinner *ngIf="isLoading" mode="indeterminate"></p-progressSpinner>
 <div *ngIf="application">
     <div class="key-value" *ngFor="let key of keys">
         <span>{{key.replace('_',' ')| titlecase}}</span>

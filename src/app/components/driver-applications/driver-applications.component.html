@@ -4,6 +4,7 @@
         <button pButton type='button' (click)="navigateToAddDriver()" label='Add driver'
             class='p-button p-button-secondary'></button>
     </div>
+    <p-progressBar *ngIf="isLoading" mode="indeterminate"></p-progressBar>
     <div class="main">
         <p-table [columns]="keys" [value]="driverApplications" responsiveLayout="scroll">
             <ng-template pTemplate="header" let-columns>

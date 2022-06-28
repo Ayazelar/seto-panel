@@ -1,7 +1,8 @@
-<div>
-    <div class="key-value" *ngFor="let item of user | keyvalue">
-        <span>{{item.key | titlecase}}</span>
-        <p>{{item.value}}</p>
+<p-progressSpinner *ngIf="isLoading"></p-progressSpinner>
+<div *ngIf="!isLoading">
+    <div class="key-value" *ngFor="let item of keys ">
+        <span>{{item.replace('_',' ')| titlecase}}</span>
+        <p>{{user[item]}}</p>
     </div>
     
 </div>

@@ -10,6 +10,7 @@ import { DriverService } from 'src/app/services/driver.service';
 })
 export class AddDriverComponent implements OnInit {
 
+  isLoading: boolean = false;
   driverValue = {
     profilePicture: '',
     name: '',
@@ -38,7 +39,8 @@ export class AddDriverComponent implements OnInit {
 
   }
 
-  addNewDriver() {
+  async addNewDriver() {
+    this.isLoading = true
     let newDriver = {
 			driver: {
 				licences: {
@@ -67,7 +69,8 @@ export class AddDriverComponent implements OnInit {
 			},
 			company_name:this.driverValue.company_name
 		}
-    this._driverService.addNewDriver(newDriver)
+    await this._driverService.addNewDriver(newDriver)
+    this.isLoading = false;
   }
 
   imagePreview(selector: String, image: any) {

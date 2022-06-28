@@ -13,6 +13,9 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ToastModule } from 'primeng/toast';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
+import { SkeletonModule } from 'primeng/skeleton';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -81,7 +84,10 @@ import { DriverApplicationDetailComponent } from './components/driver-applicatio
     InputTextareaModule,
     ToastModule,
     MessagesModule,
-    MessageModule
+    MessageModule,
+    SkeletonModule,
+    ProgressBarModule,
+    ProgressSpinnerModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

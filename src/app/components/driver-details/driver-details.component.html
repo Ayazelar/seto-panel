@@ -3,7 +3,9 @@
     <p *ngIf="!getStatus(item.key)">{{item.value}}</p>
     <textarea pInputTextarea *ngIf="getStatus(item.key)" readonly>{{item.value}}</textarea>
 </div> -->
+<p-progressSpinner *ngIf="!driver"></p-progressSpinner>
 <div *ngIf="driver">
+   
     <div class="key-value" *ngFor="let key of keys">
         <span>{{key.replace('_',' ')| titlecase}}</span>
         <p>{{driver[key]}}</p>

@@ -26,8 +26,8 @@ export class DriverService {
 		})
 		return this.drivers
 	}
-	addNewDriver(newDriver: DriverApplication) {
-		driver_applications.insert(newDriver)
+	async addNewDriver(newDriver: DriverApplication) {
+		await driver_applications.insert(newDriver)
 	}
 	async get(id: string) {
 		return await drivers.getAll({ queryParams: { filter: { user: id }, relation: true } })

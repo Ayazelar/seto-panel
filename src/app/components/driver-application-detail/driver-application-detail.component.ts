@@ -10,21 +10,22 @@ import { DriverService } from 'src/app/services/driver.service';
 })
 export class DriverApplicationDetailComponent implements OnInit {
 
+  isLoading: boolean = false;
   application: any;
-  keys = ['name','surname','company_name','email','mobile_number','status']
-  constructor(private _route: ActivatedRoute,private _driverService:DriverService) { }
+  keys = ['name', 'surname', 'company_name', 'email', 'mobile_number', 'status']
+  constructor(private _route: ActivatedRoute, private _driverService: DriverService) { }
 
   ngOnInit(): void {
     this.getApplication()
   }
-  async getApplication(){
+  async getApplication() {
+    this.isLoading = true
     this.application = await this._driverService.getApplication(this._route.snapshot.paramMap.get('id'))
     this.application = {
       ...this.application,
       ...this.application.user
     }
     delete this.application.user
-    console.log(this.application);
-    
+    this.isLoading = false
   }
 }

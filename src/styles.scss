@@ -28,3 +28,11 @@ body {
 body .p-component {
     font-family: "Poppins", sans-serif;
 }
+.p-progressbar {
+    height: 2px !important;
+}
+p-progressSpinner {
+    position: absolute;
+    left: 50%;
+    top: 20%;
+}

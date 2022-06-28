@@ -1,5 +1,4 @@
 import * as Bucket from '@spica-devkit/bucket';
-import { environment } from 'src/environments/environment';
   /**
    * Call this method before interacting with buckets.
    * @param initOptions Initialize options to initialize the '@spica-devkit/bucket'.
@@ -7,7 +6,7 @@ import { environment } from 'src/environments/environment';
   export function initialize(
     ...initOptions: Parameters<typeof Bucket.initialize>
   ) {
-    initOptions[0].publicUrl = environment.url;
+    initOptions[0].publicUrl = 'https://seto-staging-30ad7.hq.spicaengine.com/api';
     Bucket.initialize(...initOptions);
   }
 
@@ -1538,7 +1537,7 @@ export namespace driver_applications {
   }
 }
 
-export interface Vehicle_Applications{
+export interface Car_Applications{
   _id?: string;
   model?: string;
   year?: number;
@@ -1548,19 +1547,19 @@ export interface Vehicle_Applications{
   status?: ('pending'|'accepted'|'rejected');
   status_message?: string;
 }
-export namespace vehicle_applications {
+export namespace car_applications {
   const BUCKET_ID = '62b4758f35f791002ce08def';
       export function get (...args: getArgs) {
-        return Bucket.data.get<Vehicle_Applications & id>(BUCKET_ID, ...args);
+        return Bucket.data.get<Car_Applications & id>(BUCKET_ID, ...args);
       };
       export function getAll (...args: getAllArgs) {
-        return Bucket.data.getAll<Vehicle_Applications & id>(BUCKET_ID, ...args);
+        return Bucket.data.getAll<Car_Applications & id>(BUCKET_ID, ...args);
       };
-      export function insert (document: Omit<Vehicle_Applications, "_id">) {
+      export function insert (document: Omit<Car_Applications, "_id">) {
         
         return Bucket.data.insert(BUCKET_ID, document);
       };
-      export function update (document: Vehicle_Applications & id) {
+      export function update (document: Car_Applications & id) {
         
         return Bucket.data.update(
           BUCKET_ID,
@@ -1569,7 +1568,7 @@ export namespace vehicle_applications {
         );
       };  
       export function patch (
-        document: Partial<Vehicle_Applications> & id
+        document: Partial<Car_Applications> & id
       ) {
         
         return Bucket.data.patch(BUCKET_ID, document._id, document);
@@ -1579,10 +1578,129 @@ export namespace vehicle_applications {
       };
   export namespace realtime {
         export function get (...args: realtimeGetArgs) {
-          return Bucket.data.realtime.get<Vehicle_Applications & id>(BUCKET_ID, ...args);
+          return Bucket.data.realtime.get<Car_Applications & id>(BUCKET_ID, ...args);
         };
         export function getAll (...args: realtimeGetAllArgs) {
-          return Bucket.data.realtime.getAll<Vehicle_Applications & id>(BUCKET_ID, ...args);
+          return Bucket.data.realtime.getAll<Car_Applications & id>(BUCKET_ID, ...args);
+        };
+  }
+}
+
+export interface Company_Applications{
+  _id?: string;
+  company?: {
+  name?: string;
+  short_name?: string;};
+  admin?: {
+  email?: string;
+  name?: string;
+  surname?: string;
+  phone_number?: string;};
+  created_at?: Date | string;
+  identity_id?: string;
+  status?: ('pending'|'accepted'|'rejected');
+}
+export namespace company_applications {
+  const BUCKET_ID = '62b5c7c60276c6002c67547a';
+      export function get (...args: getArgs) {
+        return Bucket.data.get<Company_Applications & id>(BUCKET_ID, ...args);
+      };
+      export function getAll (...args: getAllArgs) {
+        return Bucket.data.getAll<Company_Applications & id>(BUCKET_ID, ...args);
+      };
+      export function insert (document: Omit<Company_Applications, "_id">) {
+        
+        return Bucket.data.insert(BUCKET_ID, document);
+      };
+      export function update (document: Company_Applications & id) {
+        
+        return Bucket.data.update(
+          BUCKET_ID,
+          document._id,
+          document
+        );
+      };  
+      export function patch (
+        document: Partial<Company_Applications> & id
+      ) {
+        
+        return Bucket.data.patch(BUCKET_ID, document._id, document);
+      };  
+      export function remove (documentId: string) {
+        return Bucket.data.remove(BUCKET_ID, documentId);
+      };
+  export namespace realtime {
+        export function get (...args: realtimeGetArgs) {
+          return Bucket.data.realtime.get<Company_Applications & id>(BUCKET_ID, ...args);
+        };
+        export function getAll (...args: realtimeGetAllArgs) {
+          return Bucket.data.realtime.getAll<Company_Applications & id>(BUCKET_ID, ...args);
+        };
+  }
+}
+
+export interface Company_Admins{
+  _id?: string;
+  name?: string;
+  surname?: string;
+  phone_number?: string;
+  company?: (Company & id | string);
+  identity_id?: string;
+  email?: string;
+}
+export namespace company_admins {
+  const BUCKET_ID = '62b5c94a0276c6002c675496';
+      export function get (...args: getArgs) {
+        return Bucket.data.get<Company_Admins & id>(BUCKET_ID, ...args);
+      };
+      export function getAll (...args: getAllArgs) {
+        return Bucket.data.getAll<Company_Admins & id>(BUCKET_ID, ...args);
+      };
+      export function insert (document: Omit<Company_Admins, "_id">) {
+        ['company'].forEach((field) => {
+        if (typeof document[field] == 'object') {
+          document[field] = Array.isArray(document[field])
+            ? document[field].map((v) => v._id || v)
+            : document[field]._id;
+        }
+      });
+        return Bucket.data.insert(BUCKET_ID, document);
+      };
+      export function update (document: Company_Admins & id) {
+        ['company'].forEach((field) => {
+        if (typeof document[field] == 'object') {
+          document[field] = Array.isArray(document[field])
+            ? document[field].map((v) => v._id || v)
+            : document[field]._id;
+        }
+      });
+        return Bucket.data.update(
+          BUCKET_ID,
+          document._id,
+          document
+        );
+      };  
+      export function patch (
+        document: Partial<Company_Admins> & id
+      ) {
+        ['company'].forEach((field) => {
+        if (typeof document[field] == 'object') {
+          document[field] = Array.isArray(document[field])
+            ? document[field].map((v) => v._id || v)
+            : document[field]._id;
+        }
+      });
+        return Bucket.data.patch(BUCKET_ID, document._id, document);
+      };  
+      export function remove (documentId: string) {
+        return Bucket.data.remove(BUCKET_ID, documentId);
+      };
+  export namespace realtime {
+        export function get (...args: realtimeGetArgs) {
+          return Bucket.data.realtime.get<Company_Admins & id>(BUCKET_ID, ...args);
+        };
+        export function getAll (...args: realtimeGetAllArgs) {
+          return Bucket.data.realtime.getAll<Company_Admins & id>(BUCKET_ID, ...args);
         };
   }
 }

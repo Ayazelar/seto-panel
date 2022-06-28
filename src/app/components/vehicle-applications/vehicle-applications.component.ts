@@ -10,6 +10,7 @@ import { VehicleService } from 'src/app/services/vehicle.service';
 })
 export class VehicleApplicationsComponent implements OnInit {
 
+  isLoading: boolean = false;
   keys = ['model', 'color', 'year', 'status'];
   vehicleApplications: Vehicle[] = [];
 
@@ -21,15 +22,13 @@ export class VehicleApplicationsComponent implements OnInit {
   navigateToAddVehicle() {
     this._router.navigate(['panel/add-vehicle'])
   }
-  getVehicleApplications() {
-
-    this._vehicleService.getVehicleApplications().then(vehicleApplications => {
+  async getVehicleApplications() {
+    this.isLoading = true
+    await this._vehicleService.getVehicleApplications().then(vehicleApplications => {
       this.vehicleApplications = vehicleApplications
       console.log(this.vehicleApplications);
     })
-  }
-  navigateToDetails(id: string) {
-    this._router.navigate(['panel/vehicle-details/', JSON.stringify(id)])
+    this.isLoading = false
   }
 
   renameKey(key: string) {

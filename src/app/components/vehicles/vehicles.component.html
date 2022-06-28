@@ -1,5 +1,6 @@
 <div class="main">
     <h2>Vehicles</h2>
+    <p-progressBar *ngIf="isLoading" mode="indeterminate"></p-progressBar>
     <p-table [columns]="keys" [value]="vehicles" responsiveLayout="scroll">
         <ng-template pTemplate="header" let-columns>
             <tr>
@@ -17,5 +18,5 @@
             </tr>
         </ng-template>
     </p-table>
-    <p class="nothing" *ngIf="!vehicles">There is nothing to view</p>
+    <p class="nothing" *ngIf="!vehicles && !isLoading">There is nothing to view</p>
 </div>

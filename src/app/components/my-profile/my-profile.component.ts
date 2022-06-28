@@ -9,15 +9,23 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class MyProfileComponent implements OnInit {
 
-  user:User;
-  constructor(private _userService:UserService) { }
+  isLoading: boolean = true;
+  user: any;
+  keys = ['name', 'surname', 'email', 'phone_number', 'company']
+  constructor(private _userService: UserService) { }
 
-  async ngOnInit() {
-    await this._userService.get().then(user=>{
-      this.user = user as User
-    })
-    console.log(this.user);
-    
+  ngOnInit() {
+    this.getProfile()
   }
-
+  async getProfile() {
+    this.isLoading
+    await this._userService.get().then(user => {
+      this.user = user[0]
+      this.user = {
+        ...this.user,
+        company: this.user.company.name
+      }
+    })
+    this.isLoading = false;
+  }
 }

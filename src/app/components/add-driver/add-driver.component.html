@@ -36,7 +36,7 @@
 		<div class="field">
 			<label> ID</label>
 			<input [(ngModel)]="driverValue.id" id="id" type="text" pInputText />
-			<small>Enter  id</small>
+			<small>Enter id</small>
 		</div>
 		<div class="field">
 			<label>Driver License Number</label>
@@ -45,7 +45,8 @@
 		</div>
 		<div class="field">
 			<label>Driver License Expiration</label>
-			<p-calendar placeholder="00 / 00 / 0000" [(ngModel)]="driverValue.driver_licence.expiration" dateFormat="dd.mm.yy"></p-calendar>
+			<p-calendar placeholder="00 / 00 / 0000" [(ngModel)]="driverValue.driver_licence.expiration"
+				dateFormat="dd.mm.yy"></p-calendar>
 		</div>
 		<div class="field">
 			<label>Taxi License Number</label>
@@ -54,7 +55,8 @@
 		</div>
 		<div class="field">
 			<label>Taxi License Expiration</label>
-			<p-calendar placeholder="00 / 00 / 0000" [(ngModel)]="driverValue.taxi_licence.expiration" dateFormat="dd.mm.yy"></p-calendar>
+			<p-calendar placeholder="00 / 00 / 0000" [(ngModel)]="driverValue.taxi_licence.expiration"
+				dateFormat="dd.mm.yy"></p-calendar>
 		</div>
 	</div>
 	<div class="image-fields">
@@ -90,4 +92,4 @@
 </div>
 <button pButton type="button"
 	[disabled]="!driverValue.taxiLicencePicBack.length || !driverValue.taxiLicencePicFront.length || !driverValue.drivingLicencePic.length|| !driverValue.identityPic.length || !driverValue.profilePicture.length || !driverValue.name.length || !driverValue.surname.length || !driverValue.id || !driverValue.driver_licence.licence_number.length || !driverValue.driver_licence.expiration || !driverValue.taxi_licence.licence_number || !driverValue.taxi_licence.expiration"
-	(click)="addNewDriver()" label="Next" class="p-button-success"></button>
+	(click)="addNewDriver()" [loading]="isLoading" label="Next" class="p-button-success"></button>

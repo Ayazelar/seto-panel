@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Vehicle } from '../interfaces/vehicle';
-import { cars, initialize,vehicle_applications } from './bucket'
+import { cars, initialize,car_applications } from './bucket'
 
 @Injectable({
 	providedIn: 'root'
@@ -37,14 +37,14 @@ export class VehicleService {
 			vehicle_licence_pictures: [vehicleValue.licensePicBack, vehicleValue.licensePicBack],
 			year: vehicleValue.year
 		} 
-		vehicle_applications.insert(newVehicle)
+		car_applications.insert(newVehicle)
 
 	}
 	get(id: string) {
 		return cars.get(id)
 	}
 	async getVehicleApplications() {
-		await vehicle_applications.getAll().then(apps=>{
+		await car_applications.getAll().then(apps=>{
 			this.vehicleApplications = apps
 		})
 		return this.vehicleApplications

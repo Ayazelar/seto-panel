@@ -10,8 +10,9 @@ import { DriverService } from 'src/app/services/driver.service';
 })
 export class DriverApplicationsComponent implements OnInit {
 
-  driverApplications: DriverApplication[]=[];
-  keys = ['name','surname','email'];
+  isLoading: boolean = false;
+  driverApplications: DriverApplication[] = [];
+  keys = ['name', 'surname', 'email'];
 
   constructor(private _router: Router, private _driverService: DriverService) { }
 
@@ -22,10 +23,12 @@ export class DriverApplicationsComponent implements OnInit {
   navigateToAddDriver() {
     this._router.navigate(['panel/add-driver'])
   }
-  getDriverApplications() {
-    let driverApps = this._driverService.getDriverApplications()
-    driverApps.then(drivers=>{
-      drivers.map((driver:DriverApplication) => {
+  async getDriverApplications() {
+    this.isLoading = true
+    console.log('LOAD1',this.isLoading);
+    
+    await this._driverService.getDriverApplications().then(drivers => {
+      drivers.map((driver: DriverApplication) => {
         let mappedDriver = {
           ...driver,
           ...driver.user
@@ -33,19 +36,15 @@ export class DriverApplicationsComponent implements OnInit {
         delete mappedDriver.user;
         this.driverApplications.push(mappedDriver)
       });
-      console.log(this.driverApplications);
-      
-      // const mappedDriver = {
-      //   ...driver,
-      //   ...driver.user
-      // }
-      // delete mappedDriver.user;      
+      this.isLoading = false;  
+      console.log('LOAD2',this.isLoading);
+
     })
   }
 
   renameKey(key: string) {
     key = key.replace('_', ' ')
-    
+
     return key;
   }
   navigateToDetail(id: string) {

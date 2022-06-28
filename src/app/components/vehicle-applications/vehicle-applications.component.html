@@ -4,6 +4,7 @@
         <button pButton type='button' (click)="navigateToAddVehicle()" label='Add vehicle'
             class='p-button p-button-secondary'></button>
     </div>
+    <p-progressBar *ngIf="isLoading" mode="indeterminate"></p-progressBar>
     <div class="main">
         <p-table [columns]="keys" [value]="vehicleApplications" responsiveLayout="scroll">
             <ng-template pTemplate="header" let-columns>
@@ -16,7 +17,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
-                    <td (click)="navigateToDetails(rowData)" *ngFor="let col of columns">
+                    <td *ngFor="let col of columns">
 
                         <p *ngIf="col != 'status'">{{rowData[col]}}</p>
                         <p [ngClass]="rowData['status']" class="status" *ngIf="col == 'status'">
