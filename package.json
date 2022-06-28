@@ -21,6 +21,7 @@
     "@angular/router": "^14.0.0",
     "@spica-devkit/bucket": "^0.9.22",
     "@spica-devkit/identity": "^0.9.22",
+    "@spica-devkit/storage": "^0.9.22",
     "@spica/cli": "^0.9.22",
     "jwt-decode": "^3.1.2",
     "primeicons": "^5.0.0",

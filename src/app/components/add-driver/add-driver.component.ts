@@ -4,6 +4,7 @@ import { ConfirmationService } from 'primeng/api';
 import { Company } from 'src/app/interfaces/company';
 import { DriverApplication } from 'src/app/interfaces/driver';
 import { DriverService } from 'src/app/services/driver.service';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-add-driver',
@@ -37,7 +38,7 @@ export class AddDriverComponent implements OnInit {
     company_name: ''
   };
 
-  constructor(private _driverService: DriverService, private confirmationService: ConfirmationService,private _router: Router) { }
+  constructor(private _driverService: DriverService, private confirmationService: ConfirmationService,private _router: Router,private _imageService: ImageService) { }
 
   ngOnInit(): void {
   }
@@ -88,28 +89,41 @@ export class AddDriverComponent implements OnInit {
     this.isLoading = false;
   }
 
-  imagePreview(selector: String, image: any) {
+  imagePreview(key: String, image) {
     const reader = new FileReader();
-    console.log(selector);
     reader.readAsDataURL(image.target.files[0]);
     reader.onload = () => {
+      let result = reader.result as string
+      let mimetype = result.split(';')[0].split(':')[1];
+      this.saveImage(result, mimetype, key);
+    };
+  }
 
-      if (selector == 'profilePicture') {
-        this.driverValue.profilePicture = reader.result as string
+  async saveImage(data, mimetype, key) {
+    let file_buf = this._imageService.toBuffer(data);
+    let bufWithMeta = {
+      contentType: mimetype,
+      data: file_buf,
+      name: 'image',
+    };
+    let imageId;
+    await this._imageService.insert(bufWithMeta, imageId).then((res) => {
+      if (key == 'profilePicture') {
+        this.driverValue.profilePicture = res.url
       }
-      else if (selector == 'identityPic') {
-        this.driverValue.identityPic = reader.result as string
+      else if (key == 'identityPic') {
+        this.driverValue.identityPic = res.url
       }
-      else if (selector == 'drivingLicensePic') {
-        this.driverValue.drivingLicencePic = reader.result as string
+      else if (key == 'drivingLicensePic') {
+        this.driverValue.drivingLicencePic = res.url
       }
-      else if (selector == 'taxiLicensePicFront') {
-        this.driverValue.taxiLicencePicFront = reader.result as string
+      else if (key == 'taxiLicensePicFront') {
+        this.driverValue.taxiLicencePicFront = res.url
       }
       else {
-        this.driverValue.taxiLicencePicBack = reader.result as string
+        this.driverValue.taxiLicencePicBack = res.url
       }
-    };
+    });
   }
   showStatusMessage(message): any {
 

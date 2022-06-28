@@ -30,10 +30,10 @@ export class VehicleService {
 	async addNewVehicle(vehicleValue: any) {
 		
 		let newVehicle = {
-			model: vehicleValue.manufacturer + vehicleValue.model,
+			model: vehicleValue.manufacturer + ' ' + vehicleValue.model,
 			color: vehicleValue.color,
 			licence_plate: vehicleValue.licensePlate,
-			vehicle_licence_pictures: [vehicleValue.licensePicBack, vehicleValue.licensePicBack],
+			vehicle_licence_pictures: [vehicleValue.licensePicFront, vehicleValue.licensePicBack],
 			year: vehicleValue.year
 		} 
 		await car_applications.insert(newVehicle)
