@@ -14,6 +14,7 @@ import jwt_decode from 'jwt-decode';
 export class LoginComponent implements OnInit {
 
   constructor(private _router: Router, private _authService: AuthService, private _messageService: MessageService) { }
+  rememberMe: boolean = false;
   isLoading: boolean = false;
   loginValue = {
     email: '',
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.checkRemember()
   }
 
   navigateToSignup() {
@@ -31,10 +33,15 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
     await this._authService.login(this.loginValue).then(jwt => {
       const admin = jwt_decode(jwt);
-      if(this.isApproved(admin)){
+      if (this.isApproved(admin)) {
+        if (this.rememberMe) {
+          localStorage.setItem('remember_me', JSON.stringify(this.loginValue))
+        }else{
+          localStorage.removeItem('remember_me')
+        }
         this._authService.onUserLoggedIn(jwt)
         this._router.navigate(['panel/dashboard'])
-      }else{
+      } else {
         this.showRoleErrToast()
       }
     }).catch(() => {
@@ -54,5 +61,12 @@ export class LoginComponent implements OnInit {
 
   showErrToast() {
     this._messageService.add({ severity: 'error', summary: 'Identifier or password was incorrect.' });
+  }
+  checkRemember() {
+    const rememberVal = JSON.parse(localStorage.getItem('remember_me'))
+    if (rememberVal) {
+      this.loginValue = rememberVal
+      this.rememberMe = true
+    }
   }
 }

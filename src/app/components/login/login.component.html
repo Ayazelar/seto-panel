@@ -7,6 +7,7 @@
         <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
         <input type="password" [(ngModel)]="loginValue.password" pInputText placeholder="Password">
     </div>
+    <span><input type="checkbox" [(ngModel)]="rememberMe"> Remember Me</span>
     <span (click)="navigateToSignup()" class="sign-up">Sign up</span>
     <button (click)="login()" [loading]="isLoading" pButton type="button" label="Login" class="p-button-success"
         [disabled]="!loginValue.email.length || !loginValue.password.length"></button>
