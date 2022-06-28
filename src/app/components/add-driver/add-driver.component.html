@@ -90,6 +90,7 @@
 		</div>
 	</div>
 </div>
+<p-confirmDialog acceptLabel="Ok" [rejectVisible]="false" [header]="header" [icon]="icon"></p-confirmDialog>
 <button pButton type="button"
 	[disabled]="!driverValue.taxiLicencePicBack.length || !driverValue.taxiLicencePicFront.length || !driverValue.drivingLicencePic.length|| !driverValue.identityPic.length || !driverValue.profilePicture.length || !driverValue.name.length || !driverValue.surname.length || !driverValue.id || !driverValue.driver_licence.licence_number.length || !driverValue.driver_licence.expiration || !driverValue.taxi_licence.licence_number || !driverValue.taxi_licence.expiration"
 	(click)="addNewDriver()" [loading]="isLoading" label="Next" class="p-button-success"></button>

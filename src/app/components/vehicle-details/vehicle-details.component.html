@@ -4,6 +4,7 @@
         <textarea pInputTextarea *ngIf="getStatus(item.key)"  readonly>{{item.value}}</textarea>
     </div>
      -->
+<p-progressSpinner *ngIf="isLoading"></p-progressSpinner>
 <div *ngIf="vehicle">
     <div class="key-value" *ngFor="let key of keys">
         <span>{{key.replace('_',' ')| titlecase}}</span>

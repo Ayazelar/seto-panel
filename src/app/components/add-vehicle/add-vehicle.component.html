@@ -39,7 +39,8 @@
 		<small>Enter license picture [ back ]</small>
 		<img *ngIf="vehicleValue.licensePicBack" [src]="vehicleValue.licensePicBack" alt="">
 	</div>
-	<button pButton
+	<p-confirmDialog acceptLabel="Ok" [rejectVisible]="false" [header]="header" [icon]="icon"></p-confirmDialog>
+	<button pButton [loading]="loading"
 		[disabled]="!vehicleValue.color || !vehicleValue.manufacturer || !vehicleValue.model.length || !vehicleValue.licensePlate.length || !vehicleValue.year || !vehicleValue.licensePicFront || !vehicleValue.licensePicBack "
 		type="button" label="Next" class="p-button-success" (click)="addNewVehicle()"></button>
 </div>

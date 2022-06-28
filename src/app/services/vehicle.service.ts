@@ -27,8 +27,7 @@ export class VehicleService {
 		return this.vehicles
 	}
 
-	addNewVehicle(vehicleValue: any) {
-		console.log('SA');
+	async addNewVehicle(vehicleValue: any) {
 		
 		let newVehicle = {
 			model: vehicleValue.manufacturer + vehicleValue.model,
@@ -37,7 +36,7 @@ export class VehicleService {
 			vehicle_licence_pictures: [vehicleValue.licensePicBack, vehicleValue.licensePicBack],
 			year: vehicleValue.year
 		} 
-		car_applications.insert(newVehicle)
+		await car_applications.insert(newVehicle)
 
 	}
 	get(id: string) {
