@@ -6,6 +6,8 @@ import {
 	RouterStateSnapshot,
 	UrlTree
 } from "@angular/router";
+import * as identity from '@spica-devkit/identity'
+import { environment } from "src/environments/environment";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -15,11 +17,17 @@ export class AuthGuard implements CanActivate {
 		route: ActivatedRouteSnapshot,
 		state: RouterStateSnapshot): boolean | Promise<boolean> {
 		//identity paketinde check jwt
-		const isAuthenticated = localStorage.getItem('identity');
-		if (!isAuthenticated) {
+		let token = localStorage.getItem('identity');
+		identity.initialize({
+			identity: token,
+			publicUrl: environment.url
+		})
+		let isAuthenticated = identity.verifyToken(token).then(() => {
+			return true
+		}).catch(() => {
 			this.router.navigate(['/login']);
-		}
-
-		return true;
+			return false
+		})
+		return isAuthenticated
 	}
 }
