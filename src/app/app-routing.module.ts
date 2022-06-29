@@ -15,16 +15,17 @@ import { DriverDetailsComponent } from './components/driver-details/driver-detai
 import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-details.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { DriverApplicationDetailComponent } from './components/driver-application-detail/driver-application-detail.component';
+import { MapComponent } from './components/map/map.component';
 
 
 
 const routes: Routes = [
   {
-    path: '', redirectTo:'panel/dashboard', pathMatch:'full'
+    path: '', redirectTo: 'panel/dashboard', pathMatch: 'full'
   },
   {
     path: 'panel', component: PanelComponent, canActivate: [AuthGuard],
-    children:[
+    children: [
       {
         path: 'dashboard', component: DashboardComponent
       },
@@ -57,6 +58,9 @@ const routes: Routes = [
       },
       {
         path: 'driver-application-detail/:id', component: DriverApplicationDetailComponent
+      },
+      {
+        path: 'map', component: MapComponent
       }
     ]
   },
@@ -66,7 +70,7 @@ const routes: Routes = [
   {
     path: 'sign-up', component: SignUpComponent
   }
-  
+
 ];
 
 @NgModule({

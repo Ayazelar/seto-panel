@@ -46,7 +46,6 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { DriverApplicationDetailComponent } from './components/driver-application-detail/driver-application-detail.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
