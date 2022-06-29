@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -11,13 +12,13 @@ export class NavbarComponent implements OnInit {
 
   items: any;
 
-  constructor(private _router: Router) { }
+  constructor(private _router: Router,private translate:TranslateService) { }
 
   ngOnInit(): void {
-
+    
     this.items = [
       {
-        label: 'Dashboard',
+        label: this.translate.instant("dashboard"),
         expanded: true,
         items: [
           { label: 'Dashboard', icon: 'pi pi-server', command: () => { this._router.navigate(['panel/dashboard']) } }

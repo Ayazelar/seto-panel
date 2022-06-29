@@ -1,7 +1,7 @@
 <div class='table'>
     <div>
-        <h5>Driver Applications</h5>
-        <button pButton type='button' (click)="navigateToAddDriver()" label='Add driver'
+        <h5>{{"driver_applications"|translate}}</h5>
+        <button pButton type='button' (click)="navigateToAddDriver()" label='{{"add_driver"|translate}}'
             class='p-button p-button-secondary'></button>
     </div>
     <p-progressBar *ngIf="isLoading" mode="indeterminate"></p-progressBar>
@@ -11,7 +11,7 @@
                 <tr>
                     <th *ngFor="let col of columns ">
 
-                        {{renameKey(col) | titlecase}}
+                        {{col | translate}}
                     </th>
                 </tr>
             </ng-template>

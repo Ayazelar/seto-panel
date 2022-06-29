@@ -1,46 +1,46 @@
 <div class="main">
-	<h2>Add Vehicle</h2>
+	<h2>{{"add_vehicle"|translate}}</h2>
 	<div class="field">
-		<label>Manufacturer</label>
+		<label>{{"manufacturer"|translate}}</label>
 		<input [(ngModel)]="vehicleValue.manufacturer" id="manufacturer" type="text" pInputText />
-		<small>Enter manufacturer</small>
+		<small>{{"enter_manufacturer"|translate}}</small>
 	</div>
 	<div class="field">
-		<label>Model</label>
+		<label>{{"model"|translate}}</label>
 		<input [(ngModel)]="vehicleValue.model" id="model" type="text" pInputText />
-		<small>Enter model</small>
+		<small>{{"enter_model"|translate}}</small>
 	</div>
 	<div class="field">
-		<label>Year</label>
+		<label>{{"year"|translate}}</label>
 		<input [(ngModel)]="vehicleValue.year" id="year" type="number" pInputText />
-		<small>Enter year</small>
+		<small>{{"enter_year"|translate}}</small>
 	</div>
 	<div class="field">
-		<label>License Plate</label>
+		<label>{{"license_plate"|translate}}</label>
 		<input [(ngModel)]="vehicleValue.licensePlate" id="license-plate" type="text" pInputText />
-		<small>Enter license plate</small>
+		<small>{{"enter_license_plate"|translate}}</small>
 	</div>
 	<div class="field">
-		<label>Color</label>
+		<label>{{"color"|translate}}</label>
 		<input [(ngModel)]="vehicleValue.color" id="color" type="text" pInputText />
-		<small>Enter color</small>
+		<small>{{"enter_color"|translate}}</small>
 	</div>
 	<div class="image-field">
 		<input [(ngModel)]="vehicleValue.licensePicFront" class="file" type="file"
 			(change)="imagePreview('licensePicFront',$event)" accept="image/*">
 		<i class="pi pi-id-card"></i>
-		<small>Enter license picture [ front ]</small>
+		<small>{{"enter_license_picture_front"|translate}}</small>
 		<img *ngIf="vehicleValue.licensePicFront" [src]="vehicleValue.licensePicFront" alt="">
 	</div>
 	<div class="image-field">
 		<input [(ngModel)]="vehicleValue.licensePicBack" class="file" type="file"
 			(change)="imagePreview('licensePicBack',$event)" accept="image/*">
 		<i class="pi pi-id-card"></i>
-		<small>Enter license picture [ back ]</small>
+		<small>{{"enter_license_picture_back"|translate}}</small>
 		<img *ngIf="vehicleValue.licensePicBack" [src]="vehicleValue.licensePicBack" alt="">
 	</div>
 	<p-confirmDialog acceptLabel="Ok" [rejectVisible]="false" [header]="header" [icon]="icon"></p-confirmDialog>
 	<button pButton [loading]="loading"
 		[disabled]="!vehicleValue.color || !vehicleValue.manufacturer || !vehicleValue.model.length || !vehicleValue.licensePlate.length || !vehicleValue.year || !vehicleValue.licensePicFront || !vehicleValue.licensePicBack "
-		type="button" label="Next" class="p-button-success" (click)="addNewVehicle()"></button>
+		type="button" label="{{'next'|translate}}" class="p-button-success" (click)="addNewVehicle()"></button>
 </div>

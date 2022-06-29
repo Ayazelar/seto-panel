@@ -1,12 +1,12 @@
 <div class="main">
-    <h2>Drivers</h2>
+    <h2>{{"drivers"|translate}}</h2>
     <p-progressBar *ngIf="loading" mode="indeterminate"></p-progressBar>
     <p-table [columns]="keys" [value]="drivers" responsiveLayout="scroll">
         <ng-template pTemplate="header" let-columns>
             <tr>
                 <th *ngFor="let col of columns ">
 
-                    {{renameKey(col) | titlecase}}
+                    {{col | translate}}
                 </th>
             </tr>
         </ng-template>

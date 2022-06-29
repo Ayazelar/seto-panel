@@ -19,6 +19,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,7 +33,7 @@ import { MyProfileComponent } from './components/my-profile/my-profile.component
 import { LoginComponent } from './components/login/login.component';
 import { AddDriverComponent } from './components/add-driver/add-driver.component';
 import { FileUploadModule } from 'primeng/fileupload';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AvatarModule } from 'primeng/avatar';
 import { ListComponent } from './components/list/list.component';
 import { AddVehicleComponent } from './components/add-vehicle/add-vehicle.component';
@@ -45,6 +47,9 @@ import { SortByNamePipe } from './pipes/sort-by-name.pipe';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { DriverApplicationDetailComponent } from './components/driver-application-detail/driver-application-detail.component';
 
+export function httpTranslateLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -69,6 +74,13 @@ import { DriverApplicationDetailComponent } from './components/driver-applicatio
     DriverApplicationDetailComponent,
   ],
   imports: [
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpTranslateLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
     BrowserModule,
     AppRoutingModule,
     ButtonModule,

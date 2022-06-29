@@ -1,7 +1,7 @@
 <div class='table'>
     <div>
-        <h5>Vehicle Applications</h5>
-        <button pButton type='button' (click)="navigateToAddVehicle()" label='Add vehicle'
+        <h5>{{"vehicle_applications"|translate}}</h5>
+        <button pButton type='button' (click)="navigateToAddVehicle()" label='{{"add_vehicle"|translate}}'
             class='p-button p-button-secondary'></button>
     </div>
     <p-progressBar *ngIf="isLoading" mode="indeterminate"></p-progressBar>
@@ -11,7 +11,7 @@
                 <tr>
                     <th *ngFor="let col of columns">
 
-                        <p *ngIf="col!='status_message'">{{renameKey(col) | titlecase}}</p>
+                        <p *ngIf="col!='status_message'">{{col | translate}}</p>
                     </th>
                 </tr>
             </ng-template>

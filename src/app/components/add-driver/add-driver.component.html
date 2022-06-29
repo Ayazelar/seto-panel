@@ -1,60 +1,60 @@
-<h2>Add new driver</h2>
+<h2>{{"add_new_driver"|translate}}</h2>
 <div class="main">
 	<div class="driver-fields">
 		<div class="field">
 			<p-avatar icon="pi pi-user-plus"></p-avatar>
 			<input [(ngModel)]="driverValue.profilePicture" (change)="imagePreview('profilePicture',$event)"
 				class="file" type="file" accept="image/*">
-			<small>Enter profile picture</small>
+			<small>{{"enter_profile_picture"|translate}}</small>
 			<img *ngIf="driverValue.profilePicture" [src]="driverValue.profilePicture">
 		</div>
 		<div class="field">
-			<label>Name</label>
+			<label>{{"name"|translate}}</label>
 			<input [(ngModel)]="driverValue.name" id="name" type="text" pInputText />
-			<small>Enter name</small>
+			<small>{{"enter_name"|translate}}</small>
 		</div>
 		<div class="field">
-			<label>Surname</label>
+			<label>{{"surname"|translate}}</label>
 			<input [(ngModel)]="driverValue.surname" id="surname" type="text" pInputText />
-			<small>Enter surname</small>
+			<small>{{"enter_surname"|translate}}</small>
 		</div>
 		<div class="field">
-			<label>E-mail</label>
+			<label>{{"email"|translate}}</label>
 			<input [(ngModel)]="driverValue.email" id="email" type="text" pInputText />
-			<small>Enter e-mail</small>
+			<small>{{"enter_email"|translate}}</small>
 		</div>
 		<div class="field">
-			<label>Mobile Number</label>
+			<label>{{"mobile_number"|translate}}</label>
 			<input [(ngModel)]="driverValue.mobile_number" id="mobile_number" type="text" pInputText />
-			<small>Enter mobile number</small>
+			<small>{{"enter_mobile_number"|translate}}</small>
 		</div>
 		<div class="field">
-			<label>Company</label>
+			<label>{{"company"|translate}}</label>
 			<input [(ngModel)]="driverValue.company_name" id="company" type="text" pInputText />
-			<small>Enter company name</small>
+			<small>{{"enter_company"|translate}}</small>
 		</div>
 		<div class="field">
-			<label> ID</label>
+			<label> {{"id"|translate}}</label>
 			<input [(ngModel)]="driverValue.id" id="id" type="text" pInputText />
-			<small>Enter id</small>
+			<small>{{"enter_id"|translate}}</small>
 		</div>
 		<div class="field">
-			<label>Driver License Number</label>
+			<label>{{"driver_license_number"|translate}}</label>
 			<input [(ngModel)]="driverValue.driver_licence.licence_number" id="driver-license" type="text" pInputText />
-			<small>Enter driver licanse number</small>
+			<small>{{"enter_driver_license_number"|translate}}</small>
 		</div>
 		<div class="field">
-			<label>Driver License Expiration</label>
+			<label>{{"driver_license_expiration"|translate}}</label>
 			<p-calendar placeholder="00 / 00 / 0000" [(ngModel)]="driverValue.driver_licence.expiration"
 				dateFormat="dd.mm.yy"></p-calendar>
 		</div>
 		<div class="field">
-			<label>Taxi License Number</label>
+			<label>{{"taxi_license_number"|translate}}</label>
 			<input [(ngModel)]="driverValue.taxi_licence.licence_number" id="taxi-license" type="text" pInputText />
-			<small>Enter taxi licanse number</small>
+			<small>{{"enter_taxi_license_number"|translate}}</small>
 		</div>
 		<div class="field">
-			<label>Taxi License Expiration</label>
+			<label>{{"taxi_license_expiration"|translate}}</label>
 			<p-calendar placeholder="00 / 00 / 0000" [(ngModel)]="driverValue.taxi_licence.expiration"
 				dateFormat="dd.mm.yy"></p-calendar>
 		</div>
@@ -64,28 +64,28 @@
 			<input class="file" type="file" [(ngModel)]="driverValue.identityPic"
 				(change)="imagePreview('identityPic',$event)" accept="image/*">
 			<i class="pi pi-id-card"></i>
-			<small>Enter identity picture</small>
+			<small>{{"enter_identity_picture"|translate}}</small>
 			<img *ngIf="driverValue.identityPic" [src]="driverValue.identityPic">
 		</div>
 		<div class="image-field">
 			<input [(ngModel)]="driverValue.drivingLicencePic" (change)="imagePreview('drivingLicensePic',$event)"
 				class="file" type="file" accept="image/*">
 			<i class="pi pi-car"></i>
-			<small>Enter driving licence picture</small>
+			<small>{{"enter_driving_license_picture"|translate}}</small>
 			<img *ngIf="driverValue.drivingLicencePic" [src]="driverValue.drivingLicencePic">
 		</div>
 		<div class="image-field">
 			<input [(ngModel)]="driverValue.taxiLicencePicFront" (change)="imagePreview('taxiLicensePicFront',$event)"
 				class="file" type="file" accept="image/*">
 			<i class="pi pi-car"></i>
-			<small>Enter taxi licence picture [ front ]</small>
+			<small>{{"enter_taxi_licence_picture_front"|translate}}</small>
 			<img *ngIf="driverValue.taxiLicencePicFront" [src]="driverValue.taxiLicencePicFront">
 		</div>
 		<div class="image-field">
 			<input [(ngModel)]="driverValue.taxiLicencePicBack" (change)="imagePreview('taxiLicensePicBack',$event)"
 				class="file" type="file" accept="image/*">
 			<i class="pi pi-car"></i>
-			<small>Enter taxi licence picture [ back ]</small>
+			<small>{{"enter_taxi_licence_picture_back"|translate}}</small>
 			<img *ngIf="driverValue.taxiLicencePicBack" [src]="driverValue.taxiLicencePicBack">
 		</div>
 	</div>
@@ -93,4 +93,4 @@
 <p-confirmDialog acceptLabel="Ok" [rejectVisible]="false" [header]="header" [icon]="icon"></p-confirmDialog>
 <button pButton type="button"
 	[disabled]="!driverValue.taxiLicencePicBack.length || !driverValue.taxiLicencePicFront.length || !driverValue.drivingLicencePic.length|| !driverValue.identityPic.length || !driverValue.profilePicture.length || !driverValue.name.length || !driverValue.surname.length || !driverValue.id || !driverValue.driver_licence.licence_number.length || !driverValue.driver_licence.expiration || !driverValue.taxi_licence.licence_number || !driverValue.taxi_licence.expiration"
-	(click)="addNewDriver()" [loading]="isLoading" label="Next" class="p-button-success"></button>
+	(click)="addNewDriver()" [loading]="isLoading" label="{{'next'|translate}}" class="p-button-success"></button>

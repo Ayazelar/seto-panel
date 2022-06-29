@@ -7,7 +7,7 @@
 <p-progressSpinner *ngIf="isLoading"></p-progressSpinner>
 <div *ngIf="vehicle">
     <div class="key-value" *ngFor="let key of keys">
-        <span>{{key.replace('_',' ')| titlecase}}</span>
+        <span>{{key| translate}}</span>
         <p>{{vehicle[key]}}</p>
     </div>
 </div>

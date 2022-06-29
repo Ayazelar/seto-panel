@@ -1,12 +1,12 @@
 <div class="main">
-    <h2>Vehicles</h2>
+    <h2>{{"vehicles"|translate}}</h2>
     <p-progressBar *ngIf="isLoading" mode="indeterminate"></p-progressBar>
     <p-table [columns]="keys" [value]="vehicles" responsiveLayout="scroll">
         <ng-template pTemplate="header" let-columns>
             <tr>
                 <th *ngFor="let col of columns ">
 
-                    {{renameKey(col) | titlecase}}
+                    {{col | translate}}
                 </th>
             </tr>
         </ng-template>
