@@ -21,7 +21,8 @@ export class NavbarComponent implements OnInit {
         label: this.translate.instant("dashboard"),
         expanded: true,
         items: [
-          { label: 'Dashboard', icon: 'pi pi-server', command: () => { this._router.navigate(['panel/dashboard']) } }
+          { label: 'Dashboard', icon: 'pi pi-server', command: () => { this._router.navigate(['panel/dashboard']) } },
+          { label: 'Exploration Map', icon: 'pi pi-car', command: () => { this._router.navigate(['panel/map']) } }
         ]
       },
       {
