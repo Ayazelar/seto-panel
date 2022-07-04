@@ -28,6 +28,7 @@
     "@spica/cli": "^0.9.22",
     "jwt-decode": "^3.1.2",
     "leaflet": "^1.8.0",
+    "leaflet-routing-machine": "^3.2.12",
     "primeicons": "^5.0.0",
     "primeng": "^13.4.1",
     "rxjs": "~7.5.0",

@@ -1,17 +1,107 @@
 :host {
     .map-container {
         width: 100%;
-        height: 600px;
-    }
+        height: 700px;
+        position: relative;
 
-    .map-frame {
-        height: 100%;
-        border:4px solid #dcdcdc;
-        border-radius: 10px;
-    }
+        .map-frame {
+            height: 100%;
+            border: 4px solid #dcdcdc;
+            border-radius: 10px;
 
-    #map {
-        height: 100%;
-        border-radius: 8px;
+            #map {
+                height: 100%;
+                border-radius: 8px;
+                z-index: 1;
+            }
+            .filter {
+                width: 406px;
+                height: 440px;
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                background: white;
+                z-index: 1;
+                box-shadow: 0 0 12px 0 #00000082;
+                border-radius: 14px;
+                display: flex;
+                flex-direction: column;
+                p-tabview {
+                    ::ng-deep {
+                        .p-tabview-panels {
+                            padding: 0;
+                        }
+                        .p-tabview-nav {
+                            display: flex;
+                            justify-content: center;
+                        }
+                    }
+                    p-listbox {
+                        width: 100%;
+                        height: 100%;
+                        .driver-box {
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                            p{
+                                color: gray;
+                                font-size: 0.8rem;
+                            }
+                            img {
+                                width: 60px;
+                                height: 60px;
+                                border-radius: 50%;
+                            }
+                        }
+                        ::ng-deep {
+                            .p-listbox-list {
+                                padding: 0;
+                            }
+                            .p-listbox-list .p-listbox-item {
+                                padding: 0.5rem 1.25rem;
+                            }
+                        }
+                    }
+                }
+                .selectedUser {
+                    padding: 20px;
+
+                    .flex {
+                        display: flex;
+                        gap: 10px;
+                        align-items: center;
+                        margin-bottom: 5px;
+                        i {
+                            padding: 8px;
+                            background: #f6f6f6;
+                            border-radius: 50%;
+                            cursor: pointer;
+                        }
+                        img {
+                            height: 50px;
+                            width: 50px;
+                            border-radius: 50%;
+                        }
+                    }
+                    ul {
+                        list-style-type: none;
+                        margin-top: 20px;
+                        width: 100%;
+                        li {
+                            display: flex;
+                            font-size: 0.9rem;
+                            margin: 10px 0;
+                            span {
+                                color: gray;
+                                font-weight: 600;
+                                margin-right: 5px;
+                                font-size: 1rem;
+                                white-space: nowrap;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

@@ -30,10 +30,13 @@ body .p-component {
     font-family: "Poppins", sans-serif;
 }
 .p-progressbar {
-    height: 2px !important;
+    height: 3px !important;
 }
 p-progressSpinner {
     position: absolute;
     left: 50%;
     top: 20%;
+}
+.leaflet-control-container{
+    display: none;
 }

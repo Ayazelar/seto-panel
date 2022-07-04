@@ -1,5 +1,77 @@
 <div class="map-container">
     <div class="map-frame">
         <div id="map"></div>
+        <div class="filter" *ngIf="drivers">
+            <p-tabView [(activeIndex)]="activeTab" *ngIf="!selectedDriver" (onChange)="changeTab($event.index)">
+                <p-tabPanel header="Online">
+                    <p-listbox (onChange)="selectedDriverOnChange()" [options]="onlineDrivers"
+                        [(ngModel)]="selectedDriver" [metaKeySelection]="false" [filter]="true" optionLabel="user.name">
+                        <ng-template let-driver pTemplate="item">
+                            <div class="driver-box">
+                                <img [src]="driver.user.image" alt="">
+                                <div>
+                                    <span>{{driver.user.name}}</span>
+                                    <p>{{driver.car.vehicle_number + ' ' +driver.car.model + ' ' +
+                                        driver.car.color}}</p>
+                                </div>
+
+                            </div>
+                        </ng-template>
+                    </p-listbox>
+                </p-tabPanel>
+                <p-tabPanel header="On Trip">
+                    <p-listbox (onChange)="selectedDriverOnChange()" [options]="onTripDrivers"
+                        [(ngModel)]="selectedDriver" [metaKeySelection]="false" [filter]="true" optionLabel="user.name">
+                        <ng-template let-driver pTemplate="item">
+                            <div class="driver-box" (click)="getLastDrive(driver)">
+                                <img [src]="driver.user.image" alt="">
+                                <div>
+                                    <span>{{driver.user.name}}</span>
+                                    <p>{{driver.car.vehicle_number + ' ' +driver.car.model + ' ' +
+                                        driver.car.color}}</p>
+                                </div>
+
+                            </div>
+                        </ng-template>
+                    </p-listbox>
+                </p-tabPanel>
+                <p-tabPanel header="Waiting">
+                    <p-listbox (onChange)="selectedDriverOnChange()" [options]="waitingDrivers"
+                        [(ngModel)]="selectedDriver" [metaKeySelection]="false" [filter]="true" optionLabel="user.name">
+                        <ng-template let-driver pTemplate="item">
+                            <div class="driver-box">
+                                <img [src]="driver.user.image" alt="">
+                                <div>
+                                    <span>{{driver.user.name}}</span>
+                                    <p>{{driver.car.vehicle_number + ' ' +driver.car.model + ' ' +
+                                        driver.car.color}}</p>
+                                </div>
+
+                            </div>
+                        </ng-template>
+                    </p-listbox>
+                </p-tabPanel>
+            </p-tabView>
+            <div class="selectedUser" *ngIf="selectedDriver">
+                <div class="flex">
+                    <i (click)="test()" class="pi pi-angle-double-left"></i>
+                    <img [src]="selectedDriver.user.image" alt="">
+                    <h3>{{selectedDriver.user.name}}</h3>
+                </div>
+                <ul *ngIf="!driveLoading">
+                    <li><span>Vehicle: </span>{{selectedDriver.car.vehicle_number + ' ' +selectedDriver.car.model + ' '
+                        +
+                        selectedDriver.car.color}}</li>
+                    <li><span>Category: </span>{{selectedDriver.car.vehicle_type.title }}</li>
+                    <li><span>Location: </span>{{selectedDriver.location.coordinates[1] + ' , ' +
+                        selectedDriver.location.coordinates[0]}}</li>
+                    <li><span>Phone: </span> {{selectedDriver.user.mobile_number}}</li>
+                    <li *ngIf="drive"><span>Status: </span>{{drive.status | titlecase}}</li>
+                    <li *ngIf="drive"><span>Pick up: </span>{{drive.address_from}}</li>
+                    <li *ngIf="drive"><span>Destination: </span>{{drive.address_to}}</li>
+                </ul>
+                <p-progressBar *ngIf="driveLoading" mode="indeterminate"></p-progressBar>
+            </div>
+        </div>
     </div>
 </div>

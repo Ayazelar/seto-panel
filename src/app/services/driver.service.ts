@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Driver, DriverApplication } from '../interfaces/driver';
 import { environment } from 'src/environments/environment';
 import { UserService } from './user.service';
-import { drivers, initialize, driver_applications, cars, Drivers } from './bucket'
+import { drivers, initialize, driver_applications, rides } from './bucket'
 import { first, switchMap, tap } from 'rxjs/operators';
 import { VehicleService } from './vehicle.service';
 
@@ -31,10 +31,10 @@ export class DriverService {
 		return this.drivers
 	}
 	async getRealtime(admin) {
-		return drivers.realtime.getAll({ filter: { is_verified: 1, company: admin[0].company._id } })
+		return drivers.realtime.getAll({ filter: { is_verified: 1, is_online: 1, company: admin[0].company._id } })
 	}
 	getCompanyDrivers(admin) {
-		return drivers.getAll({ queryParams: { relation: ['car.vehicle_type'], filter: { is_verified: 1, company: admin[0].company._id } } })
+		return drivers.getAll({ queryParams: { relation: ['car.vehicle_type', 'user'], filter: { is_verified: 1, company: admin[0].company._id } } })
 	}
 	async addNewDriver(newDriver: DriverApplication) {
 		await driver_applications.insert(newDriver)
@@ -50,5 +50,8 @@ export class DriverService {
 	}
 	async getApplication(id: string) {
 		return await driver_applications.get(id)
+	}
+	async getLastDrive(driverId) {
+		return rides.getAll({ queryParams: { limit: 1, sort: { 'ride_start_at': 1 }, filter: { driver: driverId, status: { $nin: ['rejected', 'cancelled'] } } } })
 	}
 }

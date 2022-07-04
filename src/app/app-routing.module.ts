@@ -24,7 +24,7 @@ const routes: Routes = [
     path: '', redirectTo: 'panel/dashboard', pathMatch: 'full'
   },
   {
-    path: 'panel', component: PanelComponent, canActivate: [AuthGuard],
+    path: 'panel', component: PanelComponent, 
     children: [
       {
         path: 'dashboard', component: DashboardComponent

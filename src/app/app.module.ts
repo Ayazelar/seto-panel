@@ -7,7 +7,7 @@ import { PanelMenuModule } from 'primeng/panelmenu';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ToastModule } from 'primeng/toast';
@@ -21,6 +21,9 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { BadgeModule } from 'primeng/badge';
+import { ListboxModule } from 'primeng/listbox';
+import { TabViewModule } from 'primeng/tabview';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -46,6 +49,8 @@ import { TypeofPipe } from './pipes/typeof.pipe';
 import { SortByNamePipe } from './pipes/sort-by-name.pipe';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { DriverApplicationDetailComponent } from './components/driver-application-detail/driver-application-detail.component';
+import { CommonModule } from '@angular/common';
+import { MapComponent } from './components/map/map.component';
 
 export function httpTranslateLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -72,6 +77,7 @@ export function httpTranslateLoaderFactory(http: HttpClient) {
     SortByNamePipe,
     SignUpComponent,
     DriverApplicationDetailComponent,
+    MapComponent
   ],
   imports: [
     TranslateModule.forRoot({
@@ -82,6 +88,9 @@ export function httpTranslateLoaderFactory(http: HttpClient) {
       }
     }),
     BrowserModule,
+    FormsModule,
+    CommonModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     ButtonModule,
     SplitterModule,
@@ -93,7 +102,6 @@ export function httpTranslateLoaderFactory(http: HttpClient) {
     HttpClientModule,
     AvatarModule,
     DropdownModule,
-    FormsModule,
     CalendarModule,
     InputTextareaModule,
     ToastModule,
@@ -104,6 +112,9 @@ export function httpTranslateLoaderFactory(http: HttpClient) {
     ProgressSpinnerModule,
     CheckboxModule,
     ConfirmDialogModule,
+    BadgeModule,
+    ListboxModule,
+    TabViewModule
   ],
   providers: [AuthGuard, ConfirmationService],
   bootstrap: [AppComponent]
