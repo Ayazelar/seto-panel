@@ -17,13 +17,13 @@ export class MyProfileComponent implements OnInit {
   ngOnInit() {
     this.getProfile()
   }
+
   async getProfile() {
     this.isLoading
     await this._userService.get().then(user => {
-      this.user = user[0]
       this.user = {
-        ...this.user,
-        company: this.user.company.name
+        ...user,
+        company: user.company.name
       }
     })
     this.isLoading = false;

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DriverApplication } from 'src/app/interfaces/driver';
 import { DriverService } from 'src/app/services/driver.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-driver-applications',
@@ -14,7 +15,7 @@ export class DriverApplicationsComponent implements OnInit {
   driverApplications: DriverApplication[] = [];
   keys = ['name', 'surname', 'email'];
 
-  constructor(private _router: Router, private _driverService: DriverService) { }
+  constructor(private _router: Router, private _driverService: DriverService, private _userService: UserService) { }
 
   ngOnInit(): void {
     this.getDriverApplications()
@@ -25,19 +26,22 @@ export class DriverApplicationsComponent implements OnInit {
   }
   async getDriverApplications() {
     this.isLoading = true
-    console.log('LOAD1',this.isLoading);
-    
+    console.log('LOAD1', this.isLoading);
+
+    const company = await this._userService.get().then(u => u.company._id)
+
     await this._driverService.getDriverApplications().then(drivers => {
       drivers.map((driver: DriverApplication) => {
         let mappedDriver = {
           ...driver,
-          ...driver.user
+          ...driver.user,
+          company
         }
         delete mappedDriver.user;
         this.driverApplications.push(mappedDriver)
       });
-      this.isLoading = false;  
-      console.log('LOAD2',this.isLoading);
+      this.isLoading = false;
+      console.log('LOAD2', this.isLoading);
 
     })
   }

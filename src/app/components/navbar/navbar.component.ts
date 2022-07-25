@@ -48,7 +48,7 @@ export class NavbarComponent implements OnInit {
       {
         label: 'Actions',
         items: [
-          { label: 'Logout', icon: 'pi pi-user-minus', command: () => { localStorage.removeItem('identity');this._router.navigate(['login']) } }
+          { label: 'Logout', icon: 'pi pi-user-minus', command: () => { localStorage.removeItem('identity');localStorage.removeItem('profile');this._router.navigate(['login']) } }
         ]
       },
     ]

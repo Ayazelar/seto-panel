@@ -17,9 +17,19 @@ export class UserService {
   }
 
   get() {
-    let user_info = jwt_decode(localStorage.getItem('identity')) as any    
-    return company_admins.getAll({queryParams:{filter:{email:user_info.identifier},relation:true}})
+    let cachedProfile = localStorage.getItem("profile")
+
+    if (!cachedProfile) {
+      const user_info = jwt_decode(localStorage.getItem('identity')) as any;
+      return company_admins.getAll({ queryParams: { filter: { email: user_info.identifier }, relation: true } }).then((r) => {
+        localStorage.setItem("profile", JSON.stringify(r[0]));
+        return r[0]
+      })
+    }
+
+    return Promise.resolve(JSON.parse(cachedProfile))
   }
+
   addNewUser(userValue: User) {
     // this.http.post()
   }

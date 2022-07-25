@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { ImageService } from 'src/app/services/image.service';
+import { UserService } from 'src/app/services/user.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
 
 @Component({
@@ -14,17 +15,17 @@ export class AddVehicleComponent implements OnInit {
   header: string;
   icon: string;
   loading: boolean = false;
-  vehicleValue = {
+  vehicleValue: any = {
     manufacturer: '',
     model: '',
     year: '',
     licensePlate: '',
     color: '',
     licensePicFront: '',
-    licensePicBack: ''
+    licensePicBack: '',
   }
 
-  constructor(private _vehicleService: VehicleService, private confirmationService: ConfirmationService, private _router: Router, private _imageService: ImageService) { }
+  constructor(private _vehicleService: VehicleService, private _userService: UserService, private confirmationService: ConfirmationService, private _router: Router, private _imageService: ImageService) { }
 
   ngOnInit(): void {
   }
@@ -52,6 +53,7 @@ export class AddVehicleComponent implements OnInit {
   }
   async addNewVehicle() {
     this.loading = true
+    this.vehicleValue.company = await this._userService.get().then(u => u.company._id)
     await this._vehicleService.addNewVehicle(this.vehicleValue).then(() => {
       this.header = 'Successful';
       this.icon = 'pi pi-check-circle';
