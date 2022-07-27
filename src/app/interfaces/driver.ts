@@ -29,7 +29,7 @@ export interface DriverApplication {
   };
   status?: "pending" | "accepted" | "rejected";
   status_message?: string;
-  company_name: string
+  company: string
 }
 
 interface Licence {

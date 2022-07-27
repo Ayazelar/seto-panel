@@ -31,10 +31,10 @@ export class DriverService {
 		return this.drivers
 	}
 	async getRealtime(admin) {
-		return drivers.realtime.getAll({ filter: { is_verified: 1, is_online: 1, company: admin[0].company._id } })
+		return drivers.realtime.getAll({ filter: { is_verified: 1, is_online: 1, company: admin.company._id } })
 	}
 	getCompanyDrivers(admin) {
-		return drivers.getAll({ queryParams: { relation: ['car.vehicle_type', 'user'], filter: { is_verified: 1, company: admin[0].company._id } } })
+		return drivers.getAll({ queryParams: { relation: ['car.vehicle_type', 'user'], filter: { is_verified: 1, company: admin.company._id } } })
 	}
 	async addNewDriver(newDriver: DriverApplication) {
 		await driver_applications.insert(newDriver)

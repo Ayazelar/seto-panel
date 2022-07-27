@@ -12,7 +12,7 @@ export class DriverApplicationDetailComponent implements OnInit {
 
   isLoading: boolean = false;
   application: any;
-  keys = ['name', 'surname', 'company_name', 'email', 'mobile_number', 'status']
+  keys = ['name', 'surname', 'email', 'mobile_number', 'status']
   constructor(private _route: ActivatedRoute, private _driverService: DriverService) { }
 
   ngOnInit(): void {

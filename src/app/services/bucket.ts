@@ -39,8 +39,8 @@ export interface Users{
   language?: string;
   role?: ('administrator'|'driver'|'customer');
   identity_id?: string;
-  cards?: (Stripe_Cards & id | string)[];
   ratings?: number;
+  stripe_customer_id?: string;
 }
 export namespace users {
   const BUCKET_ID = '6274e65152b22a002c579e65';
@@ -51,23 +51,11 @@ export namespace users {
         return Bucket.data.getAll<Users & id>(BUCKET_ID, ...args);
       };
       export function insert (document: Omit<Users, "_id">) {
-        ['cards'].forEach((field) => {
-        if (typeof document[field] == 'object') {
-          document[field] = Array.isArray(document[field])
-            ? document[field].map((v) => v._id || v)
-            : document[field]._id;
-        }
-      });
+        
         return Bucket.data.insert(BUCKET_ID, document);
       };
       export function update (document: Users & id) {
-        ['cards'].forEach((field) => {
-        if (typeof document[field] == 'object') {
-          document[field] = Array.isArray(document[field])
-            ? document[field].map((v) => v._id || v)
-            : document[field]._id;
-        }
-      });
+        
         return Bucket.data.update(
           BUCKET_ID,
           document._id,
@@ -77,13 +65,7 @@ export namespace users {
       export function patch (
         document: Partial<Users> & id
       ) {
-        ['cards'].forEach((field) => {
-        if (typeof document[field] == 'object') {
-          document[field] = Array.isArray(document[field])
-            ? document[field].map((v) => v._id || v)
-            : document[field]._id;
-        }
-      });
+        
         return Bucket.data.patch(BUCKET_ID, document._id, document);
       };  
       export function remove (documentId: string) {
@@ -129,6 +111,9 @@ export interface Drivers{
   document?: string;
   license?: string;
   company?: (Company & id | string);
+  online_times?: {
+  online_at?: Date | string;
+  offline_at?: Date | string;}[];
 }
 export namespace drivers {
   const BUCKET_ID = '6274e65252b22a002c579e72';
@@ -281,7 +266,7 @@ export interface Rides{
   discount?: number;
   payment_status?: ('paid'|'unpaid');
   payment_method?: (Payment_Methods & id | string);
-  card?: (Stripe_Cards & id | string);
+  card_id?: string;
 }
 export namespace rides {
   const BUCKET_ID = '6274e65352b22a002c579e79';
@@ -292,7 +277,7 @@ export namespace rides {
         return Bucket.data.getAll<Rides & id>(BUCKET_ID, ...args);
       };
       export function insert (document: Omit<Rides, "_id">) {
-        ['user','driver','car','payment_method','card'].forEach((field) => {
+        ['user','driver','car','payment_method'].forEach((field) => {
         if (typeof document[field] == 'object') {
           document[field] = Array.isArray(document[field])
             ? document[field].map((v) => v._id || v)
@@ -302,7 +287,7 @@ export namespace rides {
         return Bucket.data.insert(BUCKET_ID, document);
       };
       export function update (document: Rides & id) {
-        ['user','driver','car','payment_method','card'].forEach((field) => {
+        ['user','driver','car','payment_method'].forEach((field) => {
         if (typeof document[field] == 'object') {
           document[field] = Array.isArray(document[field])
             ? document[field].map((v) => v._id || v)
@@ -318,7 +303,7 @@ export namespace rides {
       export function patch (
         document: Partial<Rides> & id
       ) {
-        ['user','driver','car','payment_method','card'].forEach((field) => {
+        ['user','driver','car','payment_method'].forEach((field) => {
         if (typeof document[field] == 'object') {
           document[field] = Array.isArray(document[field])
             ? document[field].map((v) => v._id || v)
@@ -531,6 +516,17 @@ export interface Vehicle_Types{
   created_at?: Date | string;
   updated_at?: Date | string;
   image?: string;
+  prices?: {
+  day?: {
+  fee_per_min?: number;
+  base_fee?: number;
+  fee_per_km_between1_6_km?: number;
+  fee_per_km_after_6_km?: number;};
+  night?: {
+  fee_per_min?: number;
+  base_fee?: number;
+  fee_per_km_between1_6_km?: number;
+  fee_per_km_after_6_km?: number;};};
 }
 export namespace vehicle_types {
   const BUCKET_ID = '6274e65252b22a002c579e6f';
@@ -574,7 +570,6 @@ export namespace vehicle_types {
 export interface Company{
   _id?: string;
   name?: string;
-  short_name?: string;
 }
 export namespace company {
   const BUCKET_ID = '628e42bcf06ab6002d3c2c3d';
@@ -1000,75 +995,6 @@ export namespace faqs {
   }
 }
 
-export interface Stripe_Cards{
-  _id?: string;
-  card_token?: string;
-  number?: string;
-  exp_month?: string;
-  exp_year?: string;
-  cvc?: string;
-  user?: (Users & id | string);
-  type?: ('personal'|'business');
-  holder_name?: string;
-  email?: string;
-}
-export namespace stripe_cards {
-  const BUCKET_ID = '6274e65152b22a002c579e68';
-      export function get (...args: getArgs) {
-        return Bucket.data.get<Stripe_Cards & id>(BUCKET_ID, ...args);
-      };
-      export function getAll (...args: getAllArgs) {
-        return Bucket.data.getAll<Stripe_Cards & id>(BUCKET_ID, ...args);
-      };
-      export function insert (document: Omit<Stripe_Cards, "_id">) {
-        ['user'].forEach((field) => {
-        if (typeof document[field] == 'object') {
-          document[field] = Array.isArray(document[field])
-            ? document[field].map((v) => v._id || v)
-            : document[field]._id;
-        }
-      });
-        return Bucket.data.insert(BUCKET_ID, document);
-      };
-      export function update (document: Stripe_Cards & id) {
-        ['user'].forEach((field) => {
-        if (typeof document[field] == 'object') {
-          document[field] = Array.isArray(document[field])
-            ? document[field].map((v) => v._id || v)
-            : document[field]._id;
-        }
-      });
-        return Bucket.data.update(
-          BUCKET_ID,
-          document._id,
-          document
-        );
-      };  
-      export function patch (
-        document: Partial<Stripe_Cards> & id
-      ) {
-        ['user'].forEach((field) => {
-        if (typeof document[field] == 'object') {
-          document[field] = Array.isArray(document[field])
-            ? document[field].map((v) => v._id || v)
-            : document[field]._id;
-        }
-      });
-        return Bucket.data.patch(BUCKET_ID, document._id, document);
-      };  
-      export function remove (documentId: string) {
-        return Bucket.data.remove(BUCKET_ID, documentId);
-      };
-  export namespace realtime {
-        export function get (...args: realtimeGetArgs) {
-          return Bucket.data.realtime.get<Stripe_Cards & id>(BUCKET_ID, ...args);
-        };
-        export function getAll (...args: realtimeGetAllArgs) {
-          return Bucket.data.realtime.getAll<Stripe_Cards & id>(BUCKET_ID, ...args);
-        };
-  }
-}
-
 export interface STRIPE_Card{
   _id?: string;
   customer: (STRIPE_Customer & id | string);
@@ -1312,7 +1238,6 @@ export interface STRIPE_Payment{
   _id?: string;
   customer?: (STRIPE_Customer & id | string);
   payment_method?: (STRIPE_Payment_Method & id | string);
-  card?: (STRIPE_Card & id | string);
   payment_type: ('subscribe'|'invoice'|'charge');
   token?: string;
   price?: number;
@@ -1321,6 +1246,8 @@ export interface STRIPE_Payment{
   plan?: (STRIPE_Plan & id | string);
   subscribe_id?: string;
   ride?: (Rides & id | string);
+  card_id?: string;
+  charge_id?: string;
 }
 export namespace stripe_payment {
   const BUCKET_ID = '6274e65152b22a002c579e63';
@@ -1331,7 +1258,7 @@ export namespace stripe_payment {
         return Bucket.data.getAll<STRIPE_Payment & id>(BUCKET_ID, ...args);
       };
       export function insert (document: Omit<STRIPE_Payment, "_id">) {
-        ['customer','payment_method','card','plan','ride'].forEach((field) => {
+        ['customer','payment_method','plan','ride'].forEach((field) => {
         if (typeof document[field] == 'object') {
           document[field] = Array.isArray(document[field])
             ? document[field].map((v) => v._id || v)
@@ -1341,7 +1268,7 @@ export namespace stripe_payment {
         return Bucket.data.insert(BUCKET_ID, document);
       };
       export function update (document: STRIPE_Payment & id) {
-        ['customer','payment_method','card','plan','ride'].forEach((field) => {
+        ['customer','payment_method','plan','ride'].forEach((field) => {
         if (typeof document[field] == 'object') {
           document[field] = Array.isArray(document[field])
             ? document[field].map((v) => v._id || v)
@@ -1357,7 +1284,7 @@ export namespace stripe_payment {
       export function patch (
         document: Partial<STRIPE_Payment> & id
       ) {
-        ['customer','payment_method','card','plan','ride'].forEach((field) => {
+        ['customer','payment_method','plan','ride'].forEach((field) => {
         if (typeof document[field] == 'object') {
           document[field] = Array.isArray(document[field])
             ? document[field].map((v) => v._id || v)
@@ -1494,9 +1421,9 @@ export interface Driver_Applications{
   surname?: string;
   email?: string;
   mobile_number?: string;};
-  company_name?: string;
   status?: ('pending'|'rejected'|'accepted');
   status_message?: string;
+  company?: (Company & id | string);
 }
 export namespace driver_applications {
   const BUCKET_ID = '62b46e3c35f791002ce08db6';
@@ -1507,11 +1434,23 @@ export namespace driver_applications {
         return Bucket.data.getAll<Driver_Applications & id>(BUCKET_ID, ...args);
       };
       export function insert (document: Omit<Driver_Applications, "_id">) {
-        
+        ['company'].forEach((field) => {
+        if (typeof document[field] == 'object') {
+          document[field] = Array.isArray(document[field])
+            ? document[field].map((v) => v._id || v)
+            : document[field]._id;
+        }
+      });
         return Bucket.data.insert(BUCKET_ID, document);
       };
       export function update (document: Driver_Applications & id) {
-        
+        ['company'].forEach((field) => {
+        if (typeof document[field] == 'object') {
+          document[field] = Array.isArray(document[field])
+            ? document[field].map((v) => v._id || v)
+            : document[field]._id;
+        }
+      });
         return Bucket.data.update(
           BUCKET_ID,
           document._id,
@@ -1521,7 +1460,13 @@ export namespace driver_applications {
       export function patch (
         document: Partial<Driver_Applications> & id
       ) {
-        
+        ['company'].forEach((field) => {
+        if (typeof document[field] == 'object') {
+          document[field] = Array.isArray(document[field])
+            ? document[field].map((v) => v._id || v)
+            : document[field]._id;
+        }
+      });
         return Bucket.data.patch(BUCKET_ID, document._id, document);
       };  
       export function remove (documentId: string) {
@@ -1546,6 +1491,7 @@ export interface Car_Applications{
   vehicle_licence_pictures?: string[];
   status?: ('pending'|'accepted'|'rejected');
   status_message?: string;
+  company?: (Company & id | string);
 }
 export namespace car_applications {
   const BUCKET_ID = '62b4758f35f791002ce08def';
@@ -1556,11 +1502,23 @@ export namespace car_applications {
         return Bucket.data.getAll<Car_Applications & id>(BUCKET_ID, ...args);
       };
       export function insert (document: Omit<Car_Applications, "_id">) {
-        
+        ['company'].forEach((field) => {
+        if (typeof document[field] == 'object') {
+          document[field] = Array.isArray(document[field])
+            ? document[field].map((v) => v._id || v)
+            : document[field]._id;
+        }
+      });
         return Bucket.data.insert(BUCKET_ID, document);
       };
       export function update (document: Car_Applications & id) {
-        
+        ['company'].forEach((field) => {
+        if (typeof document[field] == 'object') {
+          document[field] = Array.isArray(document[field])
+            ? document[field].map((v) => v._id || v)
+            : document[field]._id;
+        }
+      });
         return Bucket.data.update(
           BUCKET_ID,
           document._id,
@@ -1570,7 +1528,13 @@ export namespace car_applications {
       export function patch (
         document: Partial<Car_Applications> & id
       ) {
-        
+        ['company'].forEach((field) => {
+        if (typeof document[field] == 'object') {
+          document[field] = Array.isArray(document[field])
+            ? document[field].map((v) => v._id || v)
+            : document[field]._id;
+        }
+      });
         return Bucket.data.patch(BUCKET_ID, document._id, document);
       };  
       export function remove (documentId: string) {

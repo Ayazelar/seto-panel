@@ -5,6 +5,7 @@ import { Company } from 'src/app/interfaces/company';
 import { DriverApplication } from 'src/app/interfaces/driver';
 import { DriverService } from 'src/app/services/driver.service';
 import { ImageService } from 'src/app/services/image.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-add-driver',
@@ -35,10 +36,9 @@ export class AddDriverComponent implements OnInit {
     taxiLicencePicBack: '',
     email: '',
     mobile_number: '',
-    company_name: ''
   };
 
-  constructor(private _driverService: DriverService, private confirmationService: ConfirmationService,private _router: Router,private _imageService: ImageService) { }
+  constructor(private _driverService: DriverService,private _userService:UserService, private confirmationService: ConfirmationService,private _router: Router,private _imageService: ImageService) { }
 
   ngOnInit(): void {
   }
@@ -71,9 +71,9 @@ export class AddDriverComponent implements OnInit {
         email: this.driverValue.email,
         mobile_number: this.driverValue.mobile_number
       },
-      company_name: this.driverValue.company_name
+      company:await this._userService.get().then(u => u.company._id)
     }
-    await this._driverService.addNewDriver(newDriver).then(() => {
+    await this._driverService.addNewDriver(newDriver as any).then(() => {
       this.header = 'Successful';
       this.icon = 'pi pi-check-circle';
       setTimeout(()=>{
