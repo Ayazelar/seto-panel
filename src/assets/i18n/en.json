@@ -53,5 +53,15 @@
     "is_online":"Is Online",
     "phone_number":"Phone Number",
     "company_name":"Company Name",
-    "construction_year":"Construction Year"
+    "construction_year":"Construction Year",
+    "rider_invoices":"Rider Invoices",
+    "month":"Month",
+    "select_month":"Select a month",
+    "select_driver":"Select a driver",
+    "select_payment_method":"Select a payment method",
+    "created_at":"Created at",
+    "driver":"Driver",
+    "price":"Price",
+    "payment_method":"Payment Method",
+    "download":"Download"
 }

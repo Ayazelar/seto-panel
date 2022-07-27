@@ -2,6 +2,7 @@ import { Company } from "./company"
 import { User } from "./user"
 
 export interface Driver {
+  _id?: string,
   user?: (User),
   is_verified?: number,
   is_online?: number,
