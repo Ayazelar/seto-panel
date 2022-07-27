@@ -1,25 +1,23 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
+import { payment_methods } from '../services/bucket';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PaymentMethodService {
+  constructor() {}
 
-  constructor() { }
+  getAll(filter: { ids: string[] } = { ids: [] }) {
+    let preparedFilter: any = {};
 
-  // mock method 
-  getAll(){
-    return of([
-      {
-        _id:"1",
-        title:"Card",
-      },
-      {
-        _id:"2",
-        title:"Stripe",
-      }
-    ])
+    if (filter.ids.length) {
+      preparedFilter._id = {
+        $in: filter.ids,
+      };
+    }
+    return payment_methods.getAll({
+      queryParams: { filter: preparedFilter },
+    }) as Promise<any>;
   }
-
 }

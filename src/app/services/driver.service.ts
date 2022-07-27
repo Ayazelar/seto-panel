@@ -23,22 +23,9 @@ export class DriverService {
 		})
 	}
 
-	// mock method to list drivers
-	getDrivers(){
-		return of([
-			{
-				_id: '1',
-				fullname: 'Albert Einstein',
-			},
-			{
-				_id: '2',
-				fullname: 'John Wick',
-			},
-		])
-	}
-
 	async getAll() {
-		await drivers.getAll({ queryParams: { relation: true, filter: { is_verified: 1 } } }).then(drivers => {
+		const user = await this._userService.get();
+		await drivers.getAll({ queryParams: { relation: true, filter: { is_verified: 1, company: user.company._id } } }).then(drivers => {
 			this.drivers = drivers as Driver
 		})
 		return this.drivers

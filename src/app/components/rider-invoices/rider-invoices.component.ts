@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, switchMap } from 'rxjs';
+import { BehaviorSubject, generate, switchMap } from 'rxjs';
+import { Driver } from 'src/app/interfaces/driver';
+import { User } from 'src/app/interfaces/user';
+import { Rider_Invoices } from 'src/app/services/bucket';
 import { DriverService } from 'src/app/services/driver.service';
 import { InvoicesService } from 'src/app/services/invoices.service';
 import { PaymentMethodService } from 'src/app/services/payment-method.service';
@@ -37,18 +40,43 @@ export class RiderInvoicesComponent implements OnInit {
 
   ngOnInit(): void {
     this.driverService
-      .getDrivers()
-      .toPromise()
-      .then((drivers) => (this.drivers = drivers));
+      .getAll()
+      .then((drivers) => (this.drivers = this.mapDrivers(drivers)));
 
     this.paymentMethodService
       .getAll()
-      .toPromise()
       .then((paymentMethods) => (this.paymentMethods = paymentMethods));
 
     this.$refresh
       .pipe(switchMap((filter) => this.invoicesService.getAll(filter)))
-      .subscribe((invoices) => (this.invoices = invoices));
+      .subscribe(
+        (invoices) => (this.invoices = this.mapInvoices(invoices as any))
+      );
+  }
+
+  generateFullName(user: User) {
+    return `${user.name} ${user.surname}`;
+  }
+
+  mapDrivers(drivers: Driver[]) {
+    return drivers.map((d) => {
+      return {
+        _id: d._id,
+        fullname: this.generateFullName(d.user),
+      };
+    });
+  }
+
+  mapInvoices(invoices: Rider_Invoices[]) {
+    return invoices.map((i) => {
+      return {
+        created_at: new Date(i.created_at),
+        driver: this.generateFullName(i.driver as User),
+        payment_method: i.payment_method.title,
+        price: i.price.toString(),
+        file: i.file,
+      };
+    });
   }
 
   onFilterChange() {
@@ -84,5 +112,9 @@ export class RiderInvoicesComponent implements OnInit {
       drivers: this.selectedDrivers,
       paymentMethods: this.selectedPaymentMethods,
     };
+  }
+
+  openFile(fileUrl: string) {
+    window.open(fileUrl, '_blank');
   }
 }

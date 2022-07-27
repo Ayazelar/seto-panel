@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
+import { rider_invoices } from '../services/bucket';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class InvoicesService {
-  constructor() {}
+  constructor(private userService: UserService) {}
 
-  getAll(filter: {
+  async getAll(filter: {
     dateRange: { from: Date; to: Date };
     drivers: string[];
     paymentMethods: string[];
@@ -15,36 +17,23 @@ export class InvoicesService {
     let preparedFilter: any = {};
 
     preparedFilter.created_at = {
-      $gte: `Date(${filter.dateRange.from})`,
-      $lte: `Date(${filter.dateRange.to})`,
+      $gte: `Date(${filter.dateRange.from.toISOString()})`,
+      $lte: `Date(${filter.dateRange.to.toISOString()})`,
     };
 
     if (filter.drivers.length) {
-      preparedFilter.drivers = {
+      preparedFilter['driver.id'] = {
         $in: filter.drivers,
       };
     }
 
     if (filter.paymentMethods.length) {
-      preparedFilter.paymentMethods = {
-        $in: filter.paymentMethods,
-      };
+      preparedFilter["payment_method.id"] = { $in: filter.paymentMethods } 
     }
 
-    // call the service here
-    return of([
-      {
-        created_at: new Date(),
-        driver: 'Mahmut',
-        price: '$12',
-        payment_method: 'Cash',
-      },
-      {
-        created_at: new Date(),
-        driver: 'Necmi',
-        price: '$29',
-        payment_method: 'Card',
-      },
-    ]);
+    const user = await this.userService.get();
+    return rider_invoices.getAll({
+      queryParams: { filter: { ...preparedFilter } },
+    });
   }
 }
