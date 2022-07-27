@@ -14,7 +14,7 @@
                 <td (click)="navigateToDetails(rowData)" *ngFor="let col of columns">
                     
                     <p *ngIf="(rowData[col] | typeof)!=='boolean'&&(rowData[col] | typeof)!=='number'">{{rowData[col]}}</p>
-                    <p *ngIf="(rowData[col] | typeof)=='boolean'||(rowData[col] | typeof)=='number'" [class]="rowData[col]?'active boolean':'deactive boolean'">
+                    <p *ngIf="(rowData[col] | typeof)=='boolean'||(rowData[col] | typeof)=='number'" [class]="rowData[col]?'success boolean':'error boolean'">
                         {{rowData[col]?'Active':'Deactive'}}</p>
                 </td>
             </tr>
