@@ -1,13 +1,17 @@
 <div class="main">
     <label>Company</label>
-    <input type="text" [(ngModel)]="companyApplication.company.name" pInputText placeholder="Company Name">
-    <input type="text" [(ngModel)]="companyApplication.company.short_name" pInputText placeholder="Company Short Name">
+    <input type="text" [(ngModel)]="companyApplication.company.name" pInputText placeholder="Name">
+    <input type="text" [(ngModel)]="companyApplication.company.zip" pInputText placeholder="Zip">
+    <input type="text" [(ngModel)]="companyApplication.company.city" pInputText placeholder="City">
+    <input type="text"  [(ngModel)]="companyApplication.company.address" pInputText placeholder="Address">
+
     <label>Company Admin</label>
-    <input type="text" [(ngModel)]="companyApplication.admin.name" pInputText placeholder="Admin Name">
-    <input type="text" [(ngModel)]="companyApplication.admin.surname" pInputText placeholder="Admin Surname">
-    <input type="text" [(ngModel)]="companyApplication.admin.phone_number" pInputText placeholder="Admin Phone Number">
-    <input type="text" [(ngModel)]="companyApplication.admin.email" pInputText placeholder="Admin E-mail">
-    <input type="password" [(ngModel)]="companyApplication.admin.password" pInputText placeholder="Admin Password">
+    <input type="text" [(ngModel)]="companyApplication.admin.name" pInputText placeholder="Name">
+    <input type="text" [(ngModel)]="companyApplication.admin.surname" pInputText placeholder="Surname">
+    <input type="text" [(ngModel)]="companyApplication.admin.phone_number" pInputText placeholder="Phone Number">
+    <input type="text" [(ngModel)]="companyApplication.admin.email" pInputText placeholder="E-mail">
+    <input type="password" [(ngModel)]="companyApplication.admin.password" pInputText placeholder="Password">
     <span (click)="navigateToSignin()" class="sign-in">Sign in</span>
-    <button [disabled]="!companyApplication.company.name.length || !companyApplication.company.short_name.length || !companyApplication.admin.name.length || !companyApplication.admin.surname.length || !companyApplication.admin.phone_number.length || !companyApplication.admin.email.length" pButton (click)="signUp()" type="button" label="Sign Up" class="p-button-success"></button>
+    <button [loading]="loading" [disabled]="loading || !companyApplication.company.name.length || !companyApplication.company.zip.length || !companyApplication.company.city.length || !companyApplication.company.address.length || !companyApplication.admin.name.length || !companyApplication.admin.surname.length || !companyApplication.admin.phone_number.length || !companyApplication.admin.email.length || !companyApplication.admin.password.length" pButton (click)="signUp()" type="button" label="Sign Up" class="p-button-success"></button>
 </div>
+<p-toast position="top-right"></p-toast>
