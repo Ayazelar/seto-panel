@@ -53,5 +53,15 @@
     "is_online":"Ist online",
     "phone_number":"Telefonnummer",
     "company_name":"Name der Firma",
-    "construction_year": "Baujahr"
+    "construction_year": "Baujahr",
+    "rider_invoices":"Fahrgast Rechnungen",
+    "month":"Monat",
+    "select_month":"Wähle einen Monat",
+    "select_driver":"Wählen Sie einen Fahrer aus",
+    "select_payment_method":"Wählen Sie eine Zahlungsmethode aus",
+    "created_at":"Erstellt Bei",
+    "driver":"Fahrer",
+    "price":"Preis",
+    "payment_method":"Zahlungsmethode",
+    "download":"Download"
 }
