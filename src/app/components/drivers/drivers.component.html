@@ -5,7 +5,6 @@
         <ng-template pTemplate="header" let-columns>
             <tr>
                 <th *ngFor="let col of columns ">
-
                     {{col | translate}}
                 </th>
             </tr>
@@ -14,7 +13,7 @@
             <tr (click)="navigateToDriver(rowData['_id'])">
                 <td *ngFor="let col of columns">
                     <p *ngIf="col !== 'is_online'">{{rowData[col]}}</p>
-                    <p [class]="rowData[col]?'online boolean':'offline boolean'" *ngIf="col == 'is_online'">
+                    <p [class]="rowData[col]?'success boolean':'error boolean'" *ngIf="col == 'is_online'">
                         {{rowData[col]?'online':'offline' | titlecase}}</p>
                 </td>
             </tr>

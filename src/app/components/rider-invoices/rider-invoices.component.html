@@ -1,0 +1,59 @@
+<div class="main">
+  <h2>{{ "rider_invoices" | translate }}</h2>
+  <div class="line">
+    <div class="field">
+      <label>{{ "select_month" | translate }}</label>
+      <p-calendar
+        view="month"
+        [(ngModel)]="selectedMonth"
+        (ngModelChange)="onFilterChange()"
+        dateFormat="mm/yy"
+      ></p-calendar>
+    </div>
+    <div class="field">
+      <label>{{ "select_driver" | translate }}</label>
+      <p-multiSelect
+        [options]="drivers"
+        [(ngModel)]="selectedDrivers"
+        (ngModelChange)="onFilterChange()"
+        optionLabel="fullname"
+        optionValue="_id"
+      ></p-multiSelect>
+    </div>
+    <div class="field">
+      <label>{{ "select_payment_method" | translate }}</label>
+      <p-multiSelect
+        [options]="paymentMethods"
+        [(ngModel)]="selectedPaymentMethods"
+        (ngModelChange)="onFilterChange()"
+        optionLabel="title"
+        optionValue="_id"
+      ></p-multiSelect>
+    </div>
+  </div>
+  <p-table [columns]="keys" [value]="invoices" responsiveLayout="scroll">
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns">
+          {{ col | translate }}
+        </th>
+        <th>{{"download" | translate}}</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr>
+        <td *ngFor="let col of columns">
+          <p
+            *ngIf="rowData[col].constructor.name == 'Date'; else defaultTemplate"
+          >
+            {{ rowData[col] | date: "short" }}
+          </p>
+          <ng-template #defaultTemplate>{{ rowData[col] }}</ng-template>
+        </td>
+        <td>
+          <button pButton type="button" label="PDF" (click)="openFile(rowData.file)" class="p-button-text custom-button"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

@@ -1,31 +1,44 @@
-<div class='table'>
-    <div>
-        <h5>{{"driver_applications"|translate}}</h5>
-        <button pButton type='button' (click)="navigateToAddDriver()" label='{{"add_driver"|translate}}'
-            class='p-button p-button-secondary'></button>
-    </div>
-    <p-progressBar *ngIf="isLoading" mode="indeterminate"></p-progressBar>
-    <div class="main">
-        <p-table [columns]="keys" [value]="driverApplications" responsiveLayout="scroll">
-            <ng-template pTemplate="header" let-columns>
-                <tr>
-                    <th *ngFor="let col of columns ">
-
-                        {{col | translate}}
-                    </th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-rowData let-columns="columns">
-                <tr>
-                    <td (click)="navigateToDetail(rowData['_id'])" *ngFor="let col of columns">
-
-                        <p *ngIf="col != 'status'">{{rowData[col]}}</p>
-                        <p [ngClass]="rowData['status']" class="status" *ngIf="col == 'status'">
-                            {{rowData[col] | titlecase}}</p>
-                    </td>
-                </tr>
-            </ng-template>
-        </p-table>
-        <p class="nothing" *ngIf="!driverApplications">There is nothing to view</p>
-    </div>
+<div class="main">
+  <div class="application-header">
+    <h2>{{ "driver_applications" | translate }}</h2>
+    <button
+      pButton
+      type="button"
+      (click)="navigateToAddDriver()"
+      label="{{ 'add_driver' | translate }}"
+      class="p-button p-button-secondary custom-button"
+    ></button>
+  </div>
+  <p-progressBar *ngIf="isLoading" mode="indeterminate"></p-progressBar>
+  <p-table
+    [columns]="keys"
+    [value]="driverApplications"
+    responsiveLayout="scroll"
+  >
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns">
+          {{ col | translate }}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr>
+        <td
+          (click)="navigateToDetail(rowData['_id'])"
+          *ngFor="let col of columns"
+        >
+          <p *ngIf="col != 'status'">{{ rowData[col] }}</p>
+          <p
+            [ngClass]="rowData['status']"
+            class="status"
+            *ngIf="col == 'status'"
+          >
+            {{ rowData[col] | titlecase }}
+          </p>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <p class="nothing" *ngIf="!driverApplications">There is nothing to view</p>
 </div>

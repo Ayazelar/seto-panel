@@ -571,6 +571,10 @@ export namespace vehicle_types {
 export interface Company{
   _id?: string;
   name?: string;
+  address?: string;
+  zip?: string;
+  city?: string;
+  country?: string;
 }
 export namespace company {
   const BUCKET_ID = '628e42bcf06ab6002d3c2c3d';
