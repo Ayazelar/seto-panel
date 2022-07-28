@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Driver } from 'src/app/interfaces/driver';
 import { DriverService } from '../../services/driver.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-drivers',
@@ -14,7 +15,7 @@ export class DriversComponent implements OnInit {
   keys = ['name','surname','email','is_online']
   loading: boolean = false;
   
-  constructor(private _router: Router,private _driverService: DriverService) {
+  constructor(private _router: Router,private _driverService: DriverService,private _userService: UserService) {
 
   }
 
@@ -24,7 +25,8 @@ export class DriversComponent implements OnInit {
 
   async getDrivers(){
     this.loading = true
-    let allDirvers = await this._driverService.getAll();
+    const admin = await this._userService.get()
+    let allDirvers = await this._driverService.getAll(admin);
     
     allDirvers.map(driver=>{
       const mappedDriver = {

@@ -24,8 +24,8 @@ export class DriverService {
 		})
 	}
 
-	async getAll() {
-		await drivers.getAll({ queryParams: { relation: true, filter: { is_verified: 1 } } }).then(drivers => {
+	async getAll(admin) {
+		await drivers.getAll({ queryParams: { relation: true, filter: { company: admin.company._id } } }).then(drivers => {
 			this.drivers = drivers as Driver
 		})
 		return this.drivers
@@ -42,8 +42,8 @@ export class DriverService {
 	async get(id: string) {
 		return await drivers.getAll({ queryParams: { filter: { user: id }, relation: true } })
 	}
-	async getDriverApplications() {
-		await driver_applications.getAll().then(apps => {
+	async getDriverApplications(company) {
+		await driver_applications.getAll({queryParams:{filter:{company:company}}}).then(apps => {
 			this.driverApplications = apps
 		})
 		return this.driverApplications
