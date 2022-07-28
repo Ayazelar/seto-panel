@@ -36,10 +36,23 @@ export class InvoicesService {
       };
     }
 
-    const user = await this.userService.get();
+    const companyAdmin = await this.userService.get();
+    const additionalFilter = {};
+    switch (filter.type) {
+      case 'rider':
+        additionalFilter['sender.id'] = companyAdmin.company._id;
+        break;
+      case 'company':
+        additionalFilter['client.id'] = companyAdmin.company._id;
+        break;
+
+      default:
+        throw Error(`Received unknown invoice type ${filter.type}`);
+        break;
+    }
     return invoices.getAll({
       queryParams: {
-        filter: { ...preparedFilter, 'sender.id': user.company._id },
+        filter: { ...preparedFilter, ...additionalFilter },
         relation: ['ride.driver.user', 'ride.payment_method'],
       },
     });

@@ -42,7 +42,8 @@ export class NavbarComponent implements OnInit {
       {
         label: 'Invoices',
         items: [
-          { label: 'Rider invoices', icon: 'pi pi-user', command: () => { this._router.navigate(['panel/rider-invoices']) } },
+          { label: 'Rider invoices', icon: 'pi pi-file', command: () => { this._router.navigate(['panel/rider-invoices']) } },
+          { label: 'Company invoices', icon: 'pi pi-file', command: () => { this._router.navigate(['panel/company-invoices']) } },
         ]
       },
       {
