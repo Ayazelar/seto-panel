@@ -8,13 +8,17 @@
                         [(ngModel)]="selectedDriver" [metaKeySelection]="false" [filter]="true" optionLabel="user.name">
                         <ng-template let-driver pTemplate="item">
                             <div class="driver-box">
-                                <img [src]="driver.user.image" alt="">
+                                <div>
+                                    <img [src]="driver.user.image" alt="">
+                                    <div [ngClass]="driver.is_riding? 'is-riding':'online'" class="badge"></div>
+                                </div>
                                 <div>
                                     <span>{{driver.user.name}}</span>
                                     <p>{{driver.car.vehicle_number + ' ' +driver.car.model + ' ' +
                                         driver.car.color}}</p>
                                 </div>
-
+                                <span [ngClass]="driver.is_riding? 'is-riding':'online'"
+                                    class="status">{{driver.is_riding? 'On Trip':'Online'}}</span>
                             </div>
                         </ng-template>
                     </p-listbox>
@@ -23,14 +27,18 @@
                     <p-listbox (onChange)="selectedDriverOnChange()" [options]="onTripDrivers"
                         [(ngModel)]="selectedDriver" [metaKeySelection]="false" [filter]="true" optionLabel="user.name">
                         <ng-template let-driver pTemplate="item">
-                            <div class="driver-box" (click)="getLastDrive(driver)">
-                                <img [src]="driver.user.image" alt="">
+                            <div class="driver-box">
+                                <div>
+                                    <img [src]="driver.user.image" alt="">
+                                    <div [ngClass]="driver.is_riding? 'is-riding':'online'" class="badge"></div>
+                                </div>
                                 <div>
                                     <span>{{driver.user.name}}</span>
                                     <p>{{driver.car.vehicle_number + ' ' +driver.car.model + ' ' +
                                         driver.car.color}}</p>
                                 </div>
-
+                                <span [ngClass]="driver.is_riding? 'is-riding':'online'"
+                                    class="status">{{driver.is_riding? 'On Trip':'Online'}}</span>
                             </div>
                         </ng-template>
                     </p-listbox>
@@ -40,13 +48,17 @@
                         [(ngModel)]="selectedDriver" [metaKeySelection]="false" [filter]="true" optionLabel="user.name">
                         <ng-template let-driver pTemplate="item">
                             <div class="driver-box">
-                                <img [src]="driver.user.image" alt="">
+                                <div>
+                                    <img [src]="driver.user.image" alt="">
+                                    <div [ngClass]="driver.is_riding? 'is-riding':'online'" class="badge"></div>
+                                </div>
                                 <div>
                                     <span>{{driver.user.name}}</span>
                                     <p>{{driver.car.vehicle_number + ' ' +driver.car.model + ' ' +
                                         driver.car.color}}</p>
                                 </div>
-
+                                <span [ngClass]="driver.is_riding? 'is-riding':'online'"
+                                    class="status">{{driver.is_riding? 'On Trip':'Online'}}</span>
                             </div>
                         </ng-template>
                     </p-listbox>
@@ -54,7 +66,7 @@
             </p-tabView>
             <div class="selectedUser" *ngIf="selectedDriver">
                 <div class="flex">
-                    <i (click)="test()" class="pi pi-angle-double-left"></i>
+                    <i (click)="clearMap()" class="pi pi-angle-double-left"></i>
                     <img [src]="selectedDriver.user.image" alt="">
                     <h3>{{selectedDriver.user.name}}</h3>
                 </div>

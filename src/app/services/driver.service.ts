@@ -23,7 +23,8 @@ export class DriverService {
 		})
 	}
 
-	async getAll(admin) {
+	async getAll() {
+		const admin = await this._userService.get()
 		await drivers.getAll({ queryParams: { relation: true, filter: { company: admin.company._id } } }).then(drivers => {
 			this.drivers = drivers as Driver
 		})
@@ -42,7 +43,7 @@ export class DriverService {
 		return await drivers.getAll({ queryParams: { filter: { user: id }, relation: true } })
 	}
 	async getDriverApplications(company) {
-		await driver_applications.getAll({queryParams:{filter:{company:company}}}).then(apps => {
+		await driver_applications.getAll({ queryParams: { filter: { company: company } } }).then(apps => {
 			this.driverApplications = apps
 		})
 		return this.driverApplications
@@ -51,6 +52,6 @@ export class DriverService {
 		return await driver_applications.get(id)
 	}
 	async getLastDrive(driverId) {
-		return rides.getAll({ queryParams: { limit: 1, sort: { 'ride_start_at': 1 }, filter: { driver: driverId, status: { $nin: ['rejected', 'cancelled'] } } } })
+		return rides.getAll({ queryParams: { limit: 1, sort: { 'ride_start_at': -1 }, filter: { driver: driverId, status: { $nin: ['rejected', 'cancelled'] } } } })
 	}
 }

@@ -113,3 +113,43 @@ button.custom-button {
   padding: 4px 10px;
   font-size: 0.7rem;
 }
+
+.popup .leaflet-popup-content-wrapper .leaflet-popup-content {
+  width: 251px;
+  height: 251px;
+
+  .img-name {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+
+    img {
+      width: 60px;
+      height: 60px;
+      border: 2px solid #eaeaea;
+      border-radius: 50%;
+    }
+
+    span {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-left: 5px;
+    }
+  }
+  ion-label {
+    div {
+      display: flex;
+      align-items: center;
+      span {
+        font-size: initial;
+        font-weight: 600;
+      }
+      p{
+        margin: 5px 0  5px 5px;
+        font-size: 0.9rem;
+        color: gray;
+        
+      }
+    }
+  }
+}
