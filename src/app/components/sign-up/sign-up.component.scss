@@ -3,7 +3,7 @@
 		width: 30%;
 		height: 30%;
 		display: flex;
-        margin: 40px auto 0 auto ;
+		margin: 40px auto;
 		flex-direction: column;
 		gap: 15px;
 
@@ -17,6 +17,10 @@
 				justify-content: center;
 			}
 		}
+		textarea {
+			resize: vertical;
+		}
+
 		button {
 			width: 100%;
 		}
