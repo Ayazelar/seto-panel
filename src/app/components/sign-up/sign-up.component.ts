@@ -19,6 +19,7 @@ export class SignUpComponent implements OnInit {
       zip: '',
       city: '',
       address: '',
+      country: ''
     },
     admin: {
       name: '',

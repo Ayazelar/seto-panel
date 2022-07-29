@@ -1,6 +1,7 @@
 <div class="main">
     <label>Company</label>
     <input type="text" [(ngModel)]="companyApplication.company.name" pInputText placeholder="Name">
+    <input type="text" [(ngModel)]="companyApplication.company.country" pInputText placeholder="Country">
     <input type="text" [(ngModel)]="companyApplication.company.zip" pInputText placeholder="Zip">
     <input type="text" [(ngModel)]="companyApplication.company.city" pInputText placeholder="City">
     <input type="text"  [(ngModel)]="companyApplication.company.address" pInputText placeholder="Address">
@@ -12,6 +13,6 @@
     <input type="text" [(ngModel)]="companyApplication.admin.email" pInputText placeholder="E-mail">
     <input type="password" [(ngModel)]="companyApplication.admin.password" pInputText placeholder="Password">
     <span (click)="navigateToSignin()" class="sign-in">Sign in</span>
-    <button [loading]="loading" [disabled]="loading || !companyApplication.company.name.length || !companyApplication.company.zip.length || !companyApplication.company.city.length || !companyApplication.company.address.length || !companyApplication.admin.name.length || !companyApplication.admin.surname.length || !companyApplication.admin.phone_number.length || !companyApplication.admin.email.length || !companyApplication.admin.password.length" pButton (click)="signUp()" type="button" label="Sign Up" class="p-button-success"></button>
+    <button [loading]="loading" [disabled]="loading || !companyApplication.company.name.length  || !companyApplication.company.country.length || !companyApplication.company.zip.length || !companyApplication.company.city.length || !companyApplication.company.address.length || !companyApplication.admin.name.length || !companyApplication.admin.surname.length || !companyApplication.admin.phone_number.length || !companyApplication.admin.email.length || !companyApplication.admin.password.length" pButton (click)="signUp()" type="button" label="Sign Up" class="p-button-success"></button>
 </div>
 <p-toast position="top-right"></p-toast>
