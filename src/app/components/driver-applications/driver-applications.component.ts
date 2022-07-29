@@ -29,8 +29,9 @@ export class DriverApplicationsComponent implements OnInit {
     console.log('LOAD1', this.isLoading);
 
     const company = await this._userService.get().then(u => u.company._id)
-
-    await this._driverService.getDriverApplications().then(drivers => {
+    console.log(company);
+    
+    await this._driverService.getDriverApplications(company).then(drivers => {
       drivers.map((driver: DriverApplication) => {
         let mappedDriver = {
           ...driver,

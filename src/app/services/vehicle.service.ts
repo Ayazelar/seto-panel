@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Vehicle } from '../interfaces/vehicle';
-import { cars, initialize,car_applications } from './bucket'
+import { cars, initialize, car_applications } from './bucket'
+import { UserService } from 'src/app/services/user.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -14,15 +15,15 @@ export class VehicleService {
 	vehicleApplications: any;
 	newVehicle: Vehicle;
 
-	constructor(private http: HttpClient) {
+	constructor(private http: HttpClient, private _userService: UserService) {
 		initialize({
-			identity:localStorage.getItem('identity')
+			identity: localStorage.getItem('identity')
 		})
 	}
 
-	async getAll() {
-		await cars.getAll({queryParams:{relation:true}}).then(cars=>{
-			this.vehicles = cars 
+	async getAll(admin) {
+		await cars.getAll({ queryParams: { relation: true, filter: { company: admin.company._id } } }).then(cars => {
+			this.vehicles = cars
 		})
 		return this.vehicles
 	}
@@ -35,7 +36,7 @@ export class VehicleService {
 			vehicle_licence_pictures: [vehicleValue.licensePicFront, vehicleValue.licensePicBack],
 			year: vehicleValue.year,
 			company: vehicleValue.company
-		} 
+		}
 		await car_applications.insert(newVehicle)
 
 	}
@@ -43,7 +44,8 @@ export class VehicleService {
 		return cars.get(id)
 	}
 	async getVehicleApplications() {
-		await car_applications.getAll().then(apps=>{
+		const admin = await this._userService.get()
+		await car_applications.getAll({ queryParams: { filter: { company: admin.company._id } } }).then(apps => {
 			this.vehicleApplications = apps
 		})
 		return this.vehicleApplications
