@@ -44,7 +44,7 @@
       <tr>
         <td *ngFor="let col of columns">
           <p
-            *ngIf="rowData[col].constructor.name == 'Date'; else defaultTemplate"
+            *ngIf="(rowData[col].getMonth| typeof) == 'function'; else defaultTemplate"
           >
             {{ rowData[col] | date: "short" }}
           </p>

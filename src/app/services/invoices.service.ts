@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { rider_invoices } from '../services/bucket';
+import { invoices } from './bucket';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -10,11 +10,14 @@ export class InvoicesService {
   constructor(private userService: UserService) {}
 
   async getAll(filter: {
+    type: string;
     dateRange: { from: Date; to: Date };
     drivers: string[];
     paymentMethods: string[];
   }) {
     let preparedFilter: any = {};
+
+    preparedFilter.type = filter.type;
 
     preparedFilter.created_at = {
       $gte: `Date(${filter.dateRange.from.toISOString()})`,
@@ -22,18 +25,36 @@ export class InvoicesService {
     };
 
     if (filter.drivers.length) {
-      preparedFilter['driver.id'] = {
+      preparedFilter['ride.driver._id'] = {
         $in: filter.drivers,
       };
     }
 
     if (filter.paymentMethods.length) {
-      preparedFilter["payment_method.id"] = { $in: filter.paymentMethods } 
+      preparedFilter['ride.payment_method._id'] = {
+        $in: filter.paymentMethods,
+      };
     }
 
-    const user = await this.userService.get();
-    return rider_invoices.getAll({
-      queryParams: { filter: { ...preparedFilter } },
+    const companyAdmin = await this.userService.get();
+    const additionalFilter = {};
+    switch (filter.type) {
+      case 'rider':
+        additionalFilter['sender.id'] = companyAdmin.company._id;
+        break;
+      case 'company':
+        additionalFilter['client.id'] = companyAdmin.company._id;
+        break;
+
+      default:
+        throw Error(`Received unknown invoice type ${filter.type}`);
+        break;
+    }
+    return invoices.getAll({
+      queryParams: {
+        filter: { ...preparedFilter, ...additionalFilter },
+        relation: ['ride.driver.user', 'ride.payment_method'],
+      },
     });
   }
 }

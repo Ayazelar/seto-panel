@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, generate, switchMap } from 'rxjs';
 import { Driver } from 'src/app/interfaces/driver';
 import { User } from 'src/app/interfaces/user';
-import { Rider_Invoices } from 'src/app/services/bucket';
+import { Invoices, Payment_Methods, Rides } from 'src/app/services/bucket';
 import { DriverService } from 'src/app/services/driver.service';
 import { InvoicesService } from 'src/app/services/invoices.service';
 import { PaymentMethodService } from 'src/app/services/payment-method.service';
@@ -67,13 +67,17 @@ export class RiderInvoicesComponent implements OnInit {
     });
   }
 
-  mapInvoices(invoices: Rider_Invoices[]) {
+  mapInvoices(invoices: Invoices[]) {
     return invoices.map((i) => {
+      const ride = i.ride as Rides;
+      const driver = ride.driver as Driver;
+      const payment_method = ride.payment_method as Payment_Methods;
+
       return {
         created_at: new Date(i.created_at),
-        driver: this.generateFullName(i.driver as User),
-        payment_method: i.payment_method.title,
-        price: i.price.toString(),
+        driver: this.generateFullName(driver.user),
+        payment_method: payment_method.title,
+        price: i.total_price.toString(),
         file: i.file,
       };
     });
@@ -105,6 +109,7 @@ export class RiderInvoicesComponent implements OnInit {
     );
 
     return {
+      type: 'rider',
       dateRange: {
         from,
         to,

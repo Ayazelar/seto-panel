@@ -53,6 +53,7 @@ import { CommonModule } from '@angular/common';
 import { MapComponent } from './components/map/map.component';
 import { RiderInvoicesComponent } from './components/rider-invoices/rider-invoices.component';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { CompanyInvoicesComponent } from './components/company-invoices/company-invoices.component';
 
 export function httpTranslateLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -80,7 +81,8 @@ export function httpTranslateLoaderFactory(http: HttpClient) {
     SignUpComponent,
     DriverApplicationDetailComponent,
     MapComponent,
-    RiderInvoicesComponent
+    RiderInvoicesComponent,
+    CompanyInvoicesComponent
   ],
   imports: [
     TranslateModule.forRoot({
