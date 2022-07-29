@@ -570,6 +570,10 @@ export namespace vehicle_types {
 export interface Company{
   _id?: string;
   name?: string;
+  address?: string;
+  zip?: string;
+  city?: string;
+  country?: string;
 }
 export namespace company {
   const BUCKET_ID = '628e42bcf06ab6002d3c2c3d';
@@ -883,40 +887,51 @@ export namespace payment_methods {
   }
 }
 
-export interface Transactions{
+export interface Rider_Invoices{
   _id?: string;
-  method?: ('cash'|'stripe');
-  currency?: string;
-  amount?: number;
-  ride?: (Rides & id | string);
   created_at?: Date | string;
+  currency?: string;
+  invoice_number?: string;
+  file?: string;
+  price?: number;
+  payment_method?: {
+  title?: string;
+  description?: string;
+  _id?: string;};
+  ride?: {
+  _id?: string;};
+  user?: {
+  _id?: string;
+  name?: string;
+  surname?: string;
+  mobile_number?: string;
+  email?: string;};
+  driver?: {
+  _id?: string;
+  name?: string;
+  surname?: string;};
+  company?: {
+  _id?: string;
+  name?: string;
+  address?: string;
+  zip?: string;
+  city?: string;
+  country?: string;};
 }
-export namespace transactions {
+export namespace rider_invoices {
   const BUCKET_ID = '6274e65452b22a002c579e91';
       export function get (...args: getArgs) {
-        return Bucket.data.get<Transactions & id>(BUCKET_ID, ...args);
+        return Bucket.data.get<Rider_Invoices & id>(BUCKET_ID, ...args);
       };
       export function getAll (...args: getAllArgs) {
-        return Bucket.data.getAll<Transactions & id>(BUCKET_ID, ...args);
+        return Bucket.data.getAll<Rider_Invoices & id>(BUCKET_ID, ...args);
       };
-      export function insert (document: Omit<Transactions, "_id">) {
-        ['ride'].forEach((field) => {
-        if (typeof document[field] == 'object') {
-          document[field] = Array.isArray(document[field])
-            ? document[field].map((v) => v._id || v)
-            : document[field]._id;
-        }
-      });
+      export function insert (document: Omit<Rider_Invoices, "_id">) {
+        
         return Bucket.data.insert(BUCKET_ID, document);
       };
-      export function update (document: Transactions & id) {
-        ['ride'].forEach((field) => {
-        if (typeof document[field] == 'object') {
-          document[field] = Array.isArray(document[field])
-            ? document[field].map((v) => v._id || v)
-            : document[field]._id;
-        }
-      });
+      export function update (document: Rider_Invoices & id) {
+        
         return Bucket.data.update(
           BUCKET_ID,
           document._id,
@@ -924,15 +939,9 @@ export namespace transactions {
         );
       };  
       export function patch (
-        document: Partial<Transactions> & id
+        document: Partial<Rider_Invoices> & id
       ) {
-        ['ride'].forEach((field) => {
-        if (typeof document[field] == 'object') {
-          document[field] = Array.isArray(document[field])
-            ? document[field].map((v) => v._id || v)
-            : document[field]._id;
-        }
-      });
+        
         return Bucket.data.patch(BUCKET_ID, document._id, document);
       };  
       export function remove (documentId: string) {
@@ -940,10 +949,10 @@ export namespace transactions {
       };
   export namespace realtime {
         export function get (...args: realtimeGetArgs) {
-          return Bucket.data.realtime.get<Transactions & id>(BUCKET_ID, ...args);
+          return Bucket.data.realtime.get<Rider_Invoices & id>(BUCKET_ID, ...args);
         };
         export function getAll (...args: realtimeGetAllArgs) {
-          return Bucket.data.realtime.getAll<Transactions & id>(BUCKET_ID, ...args);
+          return Bucket.data.realtime.getAll<Rider_Invoices & id>(BUCKET_ID, ...args);
         };
   }
 }

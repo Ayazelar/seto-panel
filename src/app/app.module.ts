@@ -51,6 +51,8 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { DriverApplicationDetailComponent } from './components/driver-application-detail/driver-application-detail.component';
 import { CommonModule } from '@angular/common';
 import { MapComponent } from './components/map/map.component';
+import { RiderInvoicesComponent } from './components/rider-invoices/rider-invoices.component';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 export function httpTranslateLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -77,7 +79,8 @@ export function httpTranslateLoaderFactory(http: HttpClient) {
     SortByNamePipe,
     SignUpComponent,
     DriverApplicationDetailComponent,
-    MapComponent
+    MapComponent,
+    RiderInvoicesComponent
   ],
   imports: [
     TranslateModule.forRoot({
@@ -103,6 +106,7 @@ export function httpTranslateLoaderFactory(http: HttpClient) {
     AvatarModule,
     DropdownModule,
     CalendarModule,
+    MultiSelectModule,
     InputTextareaModule,
     ToastModule,
     MessagesModule,

@@ -1,0 +1,30 @@
+:host {
+  width: 100%;
+
+  > * {
+    margin-bottom: 30px;
+  }
+
+  .line {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+
+    .field {
+      flex: 1;
+      min-width: 200px;
+
+      ::ng-deep {
+        .p-calendar,
+        .p-multiselect {
+          width: 100% !important;
+        }
+
+        // https://github.com/primefaces/primeng/issues/9725
+        .p-hidden-accessible {
+          display: none !important;
+        }
+      }
+    }
+  }
+}

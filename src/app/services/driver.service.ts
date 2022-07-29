@@ -1,11 +1,10 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Driver, DriverApplication } from '../interfaces/driver';
-import { environment } from 'src/environments/environment';
 import { UserService } from './user.service';
 import { drivers, initialize, driver_applications, rides } from './bucket'
-import { first, switchMap, tap } from 'rxjs/operators';
 import { VehicleService } from './vehicle.service';
+import { of } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root'

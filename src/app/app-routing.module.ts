@@ -16,6 +16,7 @@ import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-de
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { DriverApplicationDetailComponent } from './components/driver-application-detail/driver-application-detail.component';
 import { MapComponent } from './components/map/map.component';
+import { RiderInvoicesComponent } from './components/rider-invoices/rider-invoices.component';
 
 
 
@@ -61,6 +62,9 @@ const routes: Routes = [
       },
       {
         path: 'map', component: MapComponent
+      },
+      {
+        path: 'rider-invoices', component: RiderInvoicesComponent
       }
     ]
   },
