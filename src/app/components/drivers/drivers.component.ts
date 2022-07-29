@@ -25,8 +25,7 @@ export class DriversComponent implements OnInit {
 
   async getDrivers(){
     this.loading = true
-    const admin = await this._userService.get()
-    let allDirvers = await this._driverService.getAll(admin);
+    let allDirvers = await this._driverService.getAll();
     
     allDirvers.map(driver=>{
       const mappedDriver = {
